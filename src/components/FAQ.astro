@@ -54,6 +54,19 @@ const preguntas = [
         ))
       }
     </div>
+
+    <div class="faq__cierre rv">
+      <p>¿No encontraste tu respuesta? Escríbenos y te atendemos directo.</p>
+      <a
+        class="boton boton--azul"
+        href="https://wa.me/528183013487"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icono nombre="whatsapp" />
+        Hablar por WhatsApp
+      </a>
+    </div>
   </div>
 </section>
 
@@ -133,5 +146,19 @@ const preguntas = [
     padding-bottom: var(--space-3);
     color: var(--texto-suave);
     max-width: 62ch;
+  }
+
+  .faq__cierre {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    text-align: center;
+  }
+
+  .faq__cierre p {
+    font-weight: var(--peso-bold);
+    color: var(--tinta-suave);
   }
 </style>
