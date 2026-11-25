@@ -1,0 +1,270 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo-mega-tarimas.png';
+import Icono from './Icono.astro';
+
+const enlaces = [
+  { href: '#tarimas', texto: 'Tarimas' },
+  { href: '#empaque', texto: 'Empaque' },
+  { href: '#madera', texto: 'Madera' },
+  { href: '#certificaciones', texto: 'Certificaciones' },
+  { href: '#cobertura', texto: 'Cobertura' },
+  { href: '#faq', texto: 'Preguntas' },
+];
+
+const enlacesMovil = [
+  { href: '#tarimas', texto: 'Nuestras Tarimas' },
+  { href: '#empaque', texto: 'Empaque Industrial' },
+  { href: '#madera', texto: 'Madera Industrial' },
+  { href: '#por-que', texto: 'Por qué MEGA Tarimas' },
+  { href: '#certificaciones', texto: 'Certificaciones' },
+  { href: '#proceso', texto: 'Proceso de cotización' },
+  { href: '#cobertura', texto: 'Cobertura' },
+  { href: '#cotizacion', texto: 'Formulario de cotización' },
+  { href: '#faq', texto: 'Preguntas frecuentes' },
+];
+---
+
+<header class="header">
+  <div class="header__barra contenedor">
+    <a href="#inicio" class="header__logo" aria-label="MEGA Tarimas, inicio">
+      <Image src={logo} alt="MEGA Tarimas" width={168} height={70} />
+    </a>
+
+    <nav class="header__nav" aria-label="Principal">
+      <ul>
+        {
+          enlaces.map((e) => (
+            <li>
+              <a href={e.href}>{e.texto}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header__acciones">
+      <a class="boton boton--amarillo boton--compacto" href="#cotizacion">Cotizar Ahora</a>
+      <button
+        class="header__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-movil"
+        id="boton-menu"
+      >
+        <Icono nombre="menu" class="icono-menu" />
+        <Icono nombre="cerrar" class="icono-cerrar" />
+        <span class="visually-hidden">Abrir menú de navegación</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="menu-movil" id="menu-movil" hidden>
+    <nav aria-label="Navegación móvil">
+      <ul>
+        {
+          enlacesMovil.map((e) => (
+            <li>
+              <a href={e.href} class="menu-movil__enlace">
+                {e.texto}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a class="boton boton--amarillo menu-movil__cta" href="#cotizacion">Cotizar Ahora</a>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding-top: clamp(0.75rem, 2vw, 1.25rem);
+  }
+
+  .header__barra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    background: rgba(253, 250, 246, 0.97);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1.5px solid var(--amarillo);
+    border-radius: var(--radio-pill);
+    padding: 0.6rem 0.75rem 0.6rem 1.25rem;
+    box-shadow:
+      0 20px 44px -18px rgba(28, 18, 13, 0.5),
+      0 0 0 5px rgba(255, 171, 0, 0.12);
+  }
+
+  .header__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .header__logo :global(img) {
+    height: 2.1rem;
+    width: auto;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__nav ul {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .header__nav a {
+    text-decoration: none;
+    font-weight: var(--peso-bold);
+    font-size: var(--tamano-pequeno);
+    color: var(--tinta-suave);
+    transition: color var(--dur-rapida) var(--ease-estandar);
+  }
+
+  .header__nav a:hover {
+    color: var(--azul);
+  }
+
+  .header__acciones {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .boton--compacto {
+    padding: 0.7rem 1.25rem;
+    display: none;
+  }
+
+  .header__toggle {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--tinta);
+    color: var(--papel);
+    border: none;
+    border-radius: var(--radio-pill);
+    flex-shrink: 0;
+  }
+
+  .header__toggle :global(svg) {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transition:
+      opacity var(--dur-rapida) var(--ease-estandar),
+      transform var(--dur-rapida) var(--ease-estandar);
+  }
+
+  .header__toggle :global(.icono-cerrar) {
+    opacity: 0;
+    transform: rotate(-90deg);
+  }
+
+  .header__toggle[aria-expanded='true'] :global(.icono-menu) {
+    opacity: 0;
+    transform: rotate(90deg);
+  }
+
+  .header__toggle[aria-expanded='true'] :global(.icono-cerrar) {
+    opacity: 1;
+    transform: rotate(0);
+  }
+
+  .menu-movil {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: var(--tinta);
+    color: var(--papel);
+    padding: clamp(6rem, 20vh, 8rem) var(--space-4) var(--space-4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+  }
+
+  .menu-movil[hidden] {
+    display: none;
+  }
+
+  .menu-movil ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-movil__enlace {
+    display: block;
+    text-decoration: none;
+    color: var(--papel);
+    font-weight: var(--peso-extrabold);
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--borde-claro-sobre-oscuro);
+  }
+
+  .menu-movil__cta {
+    align-self: flex-start;
+    margin-top: var(--space-4);
+  }
+
+  @media (min-width: 880px) {
+    .header__nav {
+      display: block;
+    }
+
+    .boton--compacto {
+      display: inline-flex;
+    }
+
+    .header__toggle {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const boton = document.getElementById('boton-menu');
+  const menu = document.getElementById('menu-movil');
+
+  if (boton && menu) {
+    const cerrar = () => {
+      menu.hidden = true;
+      boton.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      boton.focus();
+    };
+
+    const abrir = () => {
+      menu.hidden = false;
+      boton.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      menu.querySelector<HTMLAnchorElement>('a')?.focus();
+    };
+
+    boton.addEventListener('click', () => {
+      const expandido = boton.getAttribute('aria-expanded') === 'true';
+      expandido ? cerrar() : abrir();
+    });
+
+    menu.querySelectorAll('a').forEach((enlace) => {
+      enlace.addEventListener('click', cerrar);
+    });
+
+    document.addEventListener('keydown', (evento) => {
+      if (evento.key === 'Escape' && !menu.hidden) cerrar();
+    });
+  }
+</script>

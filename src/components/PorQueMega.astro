@@ -1,0 +1,155 @@
+---
+import { Image } from 'astro:assets';
+import imagen from '../assets/images/montacargas-tablones-nave.png';
+import Icono from './Icono.astro';
+
+const razones = [
+  {
+    icono: 'produccion' as const,
+    numero: '8,000',
+    numeroEtiqueta: 'tarimas estándar al día',
+    titulo: 'Producción que no se detiene',
+    cuerpo: 'Hasta 8,000 tarimas estándar al día, listas para tu operación.',
+  },
+  {
+    icono: 'inventario' as const,
+    numero: '1,000 m²',
+    numeroEtiqueta: 'de materia prima almacenada',
+    titulo: 'Inventario para entregas inmediatas',
+    cuerpo: '1,000 m² de materia prima almacenada para responder rápido.',
+  },
+  {
+    icono: 'secado' as const,
+    titulo: 'Secado controlado',
+    cuerpo: 'Menos humedad y más vida útil, sin deformaciones ni fallas.',
+  },
+  {
+    icono: 'flota' as const,
+    titulo: 'Flota propia de reparto',
+    cuerpo: 'Entregamos con nuestras unidades y personal especializado.',
+  },
+];
+---
+
+<section id="por-que" class="seccion porque">
+  <div class="contenedor porque__grid">
+    <div class="porque__intro">
+      <div class="seccion-cabecera rv">
+        <span class="etiqueta-marca">POR QUÉ MEGA TARIMAS</span>
+        <h2 class="titulo-seccion" style="margin-top:0.9rem">
+          El proveedor de tarimas de madera que tu operación necesita
+        </h2>
+        <p class="texto-guia">Producción, inventario y entrega en una sola empresa.</p>
+      </div>
+
+      <div class="porque__media rv">
+        <Image
+          src={imagen}
+          alt="Montacargas trasladando un bloque de tablones de madera recién cortados dentro de la nave de producción"
+          widths={[420, 640, 860]}
+          sizes="(min-width: 960px) 26vw, 92vw"
+          loading="lazy"
+          class="porque__imagen"
+        />
+      </div>
+    </div>
+
+    <div class="porque__lista">
+      {
+        razones.map((r, i) => (
+          <article class="porque__tarjeta rv" style={`transition-delay:${i * 80}ms`}>
+            <Icono nombre={r.icono} class="porque__icono" />
+            {r.numero ? (
+              <p class="porque__numero">
+                {r.numero}
+                <span>{r.numeroEtiqueta}</span>
+              </p>
+            ) : null}
+            <h3>{r.titulo}</h3>
+            <p>{r.cuerpo}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .porque__grid {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .porque__media {
+    margin-top: var(--space-4);
+    border-radius: var(--radio-md);
+    overflow: hidden;
+  }
+
+  .porque__imagen {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+
+  .porque__lista {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+  }
+
+  .porque__tarjeta {
+    background: var(--papel-calido);
+    border-radius: var(--radio-md);
+    padding: var(--space-4);
+    border: 1px solid var(--borde-calido);
+  }
+
+  :global(.porque__icono) {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--azul);
+  }
+
+  .porque__numero {
+    margin-top: var(--space-2);
+    font-weight: var(--peso-extrabold);
+    font-size: clamp(1.9rem, 1.3vw + 1.6rem, 2.4rem);
+    color: var(--nogal);
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .porque__numero span {
+    font-weight: var(--peso-bold);
+    font-size: var(--tamano-pequeno);
+    color: var(--tinta-suave);
+  }
+
+  .porque__tarjeta h3 {
+    margin-top: var(--space-2);
+    font-size: 1.1rem;
+  }
+
+  .porque__tarjeta p:last-child {
+    margin-top: 0.5rem;
+    color: var(--tinta-suave);
+    font-size: var(--tamano-pequeno);
+  }
+
+  @media (min-width: 640px) {
+    .porque__lista {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .porque__grid {
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: start;
+    }
+  }
+</style>

@@ -1,0 +1,108 @@
+---
+import Icono from './Icono.astro';
+
+const preguntas = [
+  {
+    q: '¿Fabrican tarimas a la medida?',
+    a: 'Sí. Diseñamos tarimas especiales de madera según dimensiones, capacidad de carga y uso de tu operación.',
+  },
+  {
+    q: '¿Sus tarimas tienen tratamiento térmico?',
+    a: 'Sí. Todas nuestras tarimas llevan tratamiento térmico y secado controlado, y cumplen NOM-144 e ISPM-15 para exportación.',
+  },
+  {
+    q: '¿Venden tarimas por mayoreo?',
+    a: 'Sí. Con capacidad de hasta 8,000 tarimas al día atendemos pedidos recurrentes y de alto volumen.',
+  },
+  {
+    q: '¿A dónde entregan?',
+    a: 'Nuevo León, Coahuila, Tamaulipas, San Luis Potosí y Guanajuato, con flota propia.',
+  },
+  {
+    q: '¿Fabrican huacales y cajas de madera a la medida?',
+    a: 'Sí. Diseñamos cajas y huacales según las dimensiones, el peso y la fragilidad de lo que vas a enviar, desde refacciones hasta maquinaria.',
+  },
+  {
+    q: '¿Su embalaje sirve para exportación?',
+    a: 'Sí. Nuestro embalaje industrial lleva tratamiento térmico y cumple NOM-144 e ISPM-15, así que puede cruzar frontera sin contratiempos.',
+  },
+];
+---
+
+<section id="faq" class="seccion faq">
+  <div class="contenedor faq__grid">
+    <div class="seccion-cabecera rv">
+      <h2 class="titulo-seccion">Preguntas frecuentes</h2>
+    </div>
+
+    <div class="faq__lista">
+      {
+        preguntas.map((item, i) => (
+          <details class="faq__item rv" style={`transition-delay:${i * 50}ms`}>
+            <summary>
+              <span>{item.q}</span>
+              <Icono nombre="chevron" class="faq__chevron" />
+            </summary>
+            <p>{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    background: var(--papel-calido);
+  }
+
+  .faq__grid {
+    max-width: 50rem;
+  }
+
+  .faq__lista {
+    margin-top: var(--space-4);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .faq__item {
+    background: var(--blanco);
+    border: 1px solid var(--borde-calido);
+    border-radius: var(--radio-md);
+    padding: 0.4rem var(--space-3);
+  }
+
+  .faq__item summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-block: 0.9rem;
+    font-weight: var(--peso-bold);
+    cursor: pointer;
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  :global(.faq__chevron) {
+    flex-shrink: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--azul);
+    transition: transform var(--dur-base) var(--ease-estandar);
+  }
+
+  .faq__item[open] :global(.faq__chevron) {
+    transform: rotate(180deg);
+  }
+
+  .faq__item p {
+    padding-bottom: var(--space-3);
+    color: var(--tinta-suave);
+    max-width: 62ch;
+  }
+</style>

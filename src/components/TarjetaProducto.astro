@@ -1,0 +1,47 @@
+---
+interface Props {
+  titulo: string;
+  acento?: 'nogal' | 'wengue' | 'roble' | 'natural' | 'azul';
+  compacta?: boolean;
+}
+
+const { titulo, acento = 'nogal', compacta = false } = Astro.props;
+---
+
+<article class:list={['tarjeta-producto', { 'tarjeta-producto--compacta': compacta }]} style={`--acento-tarjeta: var(--${acento})`}>
+  <h3 class="tarjeta-producto__titulo">{titulo}</h3>
+  <p class="tarjeta-producto__cuerpo"><slot /></p>
+</article>
+
+<style>
+  .tarjeta-producto {
+    position: relative;
+    padding-left: var(--space-3);
+    border-left: 3px solid var(--acento-tarjeta);
+    padding-block: 0.15rem;
+  }
+
+  .tarjeta-producto__titulo {
+    font-size: var(--tamano-h3);
+    color: var(--tinta);
+  }
+
+  .tarjeta-producto__cuerpo {
+    margin-top: 0.5rem;
+    color: var(--tinta-suave);
+    max-width: 38ch;
+  }
+
+  .tarjeta-producto--compacta {
+    padding-block: 0;
+  }
+
+  .tarjeta-producto--compacta .tarjeta-producto__titulo {
+    font-size: 1.05rem;
+  }
+
+  .tarjeta-producto--compacta .tarjeta-producto__cuerpo {
+    font-size: var(--tamano-pequeno);
+    margin-top: 0.35rem;
+  }
+</style>

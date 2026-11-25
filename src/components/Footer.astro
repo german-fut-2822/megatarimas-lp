@@ -1,0 +1,116 @@
+---
+import Icono from './Icono.astro';
+---
+
+<footer class="footer">
+  <div class="contenedor footer__grid">
+    <div class="footer__marca">
+      <p class="footer__nombre">MEGA TARIMAS</p>
+      <p class="footer__descripcion">
+        Tarimas, cajas, huacales y embalaje de madera para exportación, logística e industria.
+      </p>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="footer__titulo">Ubicación</h2>
+      <p class="footer__item">
+        <Icono nombre="ubicacion" />
+        <span>Callejón de los Tijerina #482, Unión Agropecuarios Lázaro Cárdenas del Norte, 66084
+          Monterrey, N.L.</span>
+      </p>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="footer__titulo">Contacto</h2>
+      <p class="footer__item">
+        <Icono nombre="telefono" />
+        <a href="tel:+528183013487">+52 (81) 83013487</a>
+      </p>
+      <p class="footer__item">
+        <Icono nombre="correo" />
+        <a href="mailto:ventas@maderasgarza.com.mx">ventas@maderasgarza.com.mx</a>
+      </p>
+      <!-- TODO: conectar la URL real del aviso de privacidad cuando el cliente la confirme. -->
+      <p class="footer__item footer__item--privacidad">
+        <a href="#aviso-de-privacidad">Aviso de privacidad</a>
+      </p>
+    </div>
+  </div>
+
+  <p class="footer__legal contenedor">© {new Date().getFullYear()} MEGA Tarimas.</p>
+</footer>
+
+<style>
+  .footer {
+    background: var(--tinta);
+    color: var(--natural);
+    padding-block: var(--space-6) var(--space-4);
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .footer__nombre {
+    font-weight: var(--peso-extrabold);
+    font-size: 1.5rem;
+    color: var(--blanco);
+    letter-spacing: -0.01em;
+  }
+
+  .footer__descripcion {
+    margin-top: var(--space-2);
+    color: rgba(231, 213, 196, 0.78);
+    max-width: 34ch;
+  }
+
+  .footer__titulo {
+    font-size: 1rem;
+    color: var(--amarillo);
+    margin-bottom: var(--space-2);
+  }
+
+  .footer__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-top: 0.6rem;
+    color: rgba(231, 213, 196, 0.88);
+  }
+
+  .footer__item a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .footer__item a:hover {
+    color: var(--amarillo);
+  }
+
+  .footer__item :global(svg) {
+    flex-shrink: 0;
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.15rem;
+    color: var(--amarillo);
+  }
+
+  .footer__item--privacidad {
+    margin-top: var(--space-3);
+  }
+
+  .footer__legal {
+    margin-top: var(--space-6);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--borde-claro-sobre-oscuro);
+    font-size: var(--tamano-micro);
+    color: rgba(231, 213, 196, 0.6);
+  }
+
+  @media (min-width: 720px) {
+    .footer__grid {
+      grid-template-columns: 1.2fr 1fr 1fr;
+    }
+  }
+</style>

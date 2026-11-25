@@ -1,0 +1,111 @@
+---
+import MapaCobertura from './MapaCobertura.astro';
+
+const estados = [
+  { nombre: 'Nuevo León', detalle: 'zona metropolitana de Monterrey' },
+  { nombre: 'Coahuila', detalle: 'Saltillo y Ramos Arizpe' },
+  { nombre: 'Tamaulipas', detalle: 'Nuevo Laredo y Matamoros' },
+  { nombre: 'San Luis Potosí y Guanajuato', detalle: '' },
+];
+---
+
+<section id="cobertura" class="seccion cobertura">
+  <div class="contenedor cobertura__grid">
+    <div class="cobertura__texto">
+      <div class="seccion-cabecera rv">
+        <span class="etiqueta-marca">COBERTURA</span>
+        <h2 class="titulo-seccion" style="margin-top:0.9rem; color:var(--blanco)">
+          Desde Monterrey a los corredores industriales del norte y centro
+        </h2>
+      </div>
+
+      <ul class="cobertura__ruta">
+        {
+          estados.map((e, i) => (
+            <li class="rv" style={`transition-delay:${i * 70}ms`}>
+              <span class="cobertura__punto" aria-hidden="true" />
+              <span class="cobertura__texto-item">
+                <strong>{e.nombre}</strong>
+                {e.detalle && <> · {e.detalle}</>}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="cobertura__nota rv">
+        Además contamos con la certificación ISPM-15, para que tus envíos puedan llegar a
+        cualquier parte del mundo.
+      </p>
+    </div>
+
+    <div class="cobertura__mapa rv">
+      <MapaCobertura />
+    </div>
+  </div>
+</section>
+
+<style>
+  .cobertura {
+    background: var(--nogal);
+    color: var(--natural);
+  }
+
+  .cobertura__grid {
+    display: grid;
+    gap: var(--space-6);
+    align-items: center;
+  }
+
+  .cobertura__ruta {
+    margin-top: var(--space-5);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .cobertura__ruta li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: var(--tamano-lead);
+  }
+
+  .cobertura__punto {
+    flex-shrink: 0;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--amarillo);
+  }
+
+  .cobertura__texto-item {
+    color: rgba(231, 213, 196, 0.86);
+  }
+
+  .cobertura__texto-item strong {
+    color: var(--blanco);
+    font-weight: var(--peso-bold);
+  }
+
+  .cobertura__nota {
+    margin-top: var(--space-5);
+    padding: var(--space-3) var(--space-4);
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(231, 213, 196, 0.2);
+    border-radius: var(--radio-md);
+    color: rgba(231, 213, 196, 0.9);
+    max-width: 42ch;
+  }
+
+  .cobertura__mapa {
+    max-width: 30rem;
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  @media (min-width: 960px) {
+    .cobertura__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

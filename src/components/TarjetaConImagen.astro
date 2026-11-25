@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  titulo: string;
+  imagen: ImageMetadata;
+  alt: string;
+  acento?: 'nogal' | 'wengue' | 'roble' | 'azul';
+}
+
+const { titulo, imagen, alt, acento = 'nogal' } = Astro.props;
+---
+
+<article class="tarjeta-img" style={`--acento-tarjeta: var(--${acento})`}>
+  <div class="tarjeta-img__media">
+    <Image
+      src={imagen}
+      alt={alt}
+      widths={[320, 480, 640]}
+      sizes="(min-width: 960px) 23vw, (min-width: 640px) 45vw, 90vw"
+      loading="lazy"
+      class="tarjeta-img__imagen"
+    />
+  </div>
+  <h3 class="tarjeta-img__titulo">{titulo}</h3>
+  <p class="tarjeta-img__cuerpo"><slot /></p>
+</article>
+
+<style>
+  .tarjeta-img {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tarjeta-img__media {
+    border-radius: var(--radio-sm);
+    overflow: hidden;
+    border-top: 3px solid var(--acento-tarjeta);
+  }
+
+  .tarjeta-img__imagen {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .tarjeta-img__titulo {
+    margin-top: var(--space-2);
+    font-size: 1.05rem;
+    color: var(--tinta);
+  }
+
+  .tarjeta-img__cuerpo {
+    margin-top: 0.4rem;
+    color: var(--tinta-suave);
+    font-size: var(--tamano-pequeno);
+  }
+</style>

@@ -1,0 +1,176 @@
+---
+import { Image } from 'astro:assets';
+import heroImg from '../assets/images/hero-operario-tarimas.png';
+import Icono from './Icono.astro';
+import WoodGrain from './WoodGrain.astro';
+
+const puntos = [
+  'Venta de tarimas por mayoreo',
+  'Diseño a la medida de tu carga',
+  'Listas para exportación',
+  'Listos para Exportación Internacional',
+  'Madera Brasileña, chilena, americana y nacional',
+];
+---
+
+<section id="inicio" class="hero">
+  <div class="hero__medio">
+    <Image
+      src={heroImg}
+      alt="Operario con casco y chaleco de seguridad frente a altos estibados de tarimas de madera en una nave industrial de MEGA Tarimas"
+      widths={[640, 960, 1280, 1800]}
+      sizes="100vw"
+      quality={78}
+      loading="eager"
+      fetchpriority="high"
+      class="hero__imagen"
+    />
+    <div class="hero__degradado" aria-hidden="true"></div>
+  </div>
+
+  <div class="hero__veta" aria-hidden="true">
+    <WoodGrain corner="bottom-right" color="rgba(255,171,0,0.55)" />
+  </div>
+
+  <div class="contenedor hero__contenido">
+    <div class="hero__texto">
+      <h1 class="hero__titulo">Soluciones en madera para la industria</h1>
+      <p class="hero__parrafo">
+        Fabricantes de tarimas industriales de madera estándar, reforzadas y a la medida, tratadas
+        térmicamente y certificadas NOM-144 e ISPM-15 para exportación. Producimos hasta 8,000
+        tarimas al día. También fabricamos cajas, huacales y embalaje de madera, y vendemos madera
+        industrial.
+      </p>
+
+      <ul class="hero__lista">
+        {
+          puntos.map((p) => (
+            <li>
+              <Icono nombre="check" class="hero__check" />
+              <span>{p}</span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <a
+        class="boton boton--amarillo hero__cta"
+        href="https://wa.me/528183013487"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icono nombre="whatsapp" />
+        Cotizar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    min-height: min(78svh, 680px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: var(--blanco);
+  }
+
+  .hero__medio {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .hero__medio :global(.hero__imagen) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% 32%;
+  }
+
+  .hero__degradado {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(0deg, rgba(8, 6, 4, 0.95) 0%, rgba(8, 6, 4, 0.82) 30%, rgba(8, 6, 4, 0.5) 60%, rgba(8, 6, 4, 0.58) 100%),
+      linear-gradient(100deg, rgba(1, 15, 30, 0.65) 0%, rgba(1, 15, 30, 0) 55%);
+  }
+
+  .hero__veta {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: min(32vw, 22rem);
+    aspect-ratio: 1;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .hero__contenido {
+    position: relative;
+    padding-block: var(--space-6) var(--space-7);
+    width: 100%;
+  }
+
+  .hero__texto {
+    max-width: 40rem;
+  }
+
+  .hero__titulo {
+    font-size: var(--tamano-display);
+    line-height: var(--interlineado-display);
+    color: var(--blanco);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45);
+  }
+
+  .hero__parrafo {
+    margin-top: var(--space-3);
+    font-size: clamp(1rem, 0.94rem + 0.35vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 46ch;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero__lista {
+    margin-top: var(--space-4);
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .hero__lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-weight: var(--peso-bold);
+    font-size: var(--tamano-pequeno);
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  :global(.hero__check) {
+    flex-shrink: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+    color: var(--amarillo);
+    margin-top: 0.1rem;
+  }
+
+  .hero__cta {
+    margin-top: var(--space-5);
+    font-size: 1rem;
+    padding: 1.1rem 2rem;
+  }
+
+  .hero__cta :global(svg) {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  @media (min-width: 640px) {
+    .hero__lista {
+      grid-template-columns: repeat(2, auto);
+      column-gap: var(--space-4);
+    }
+  }
+</style>

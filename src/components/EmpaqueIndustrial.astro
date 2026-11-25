@@ -1,0 +1,87 @@
+---
+import imgHuacales from '../assets/images/huacales-madera-exterior.png';
+import imgCajas from '../assets/images/montacargas-tablones-nave.png';
+import imgEmbalajes from '../assets/images/nave-tarimas-luz.png';
+import TarjetaConImagen from './TarjetaConImagen.astro';
+
+const productos = [
+  {
+    titulo: 'Huacales de madera para exportación',
+    acento: 'nogal' as const,
+    imagen: imgHuacales,
+    alt: 'Huacales de madera apilados a la intemperie listos para exportación',
+    cuerpo:
+      'Fabricación y venta de huacales y jaulas de madera para carga, resistentes para proteger piezas y maquinaria en el traslado.',
+  },
+  {
+    titulo: 'Cajas de madera para embalaje',
+    acento: 'wengue' as const,
+    imagen: imgCajas,
+    alt: 'Montacargas trasladando un bloque de tablones de madera embalados en la nave',
+    cuerpo: 'Cajas y crates de madera a la medida, con protección contra impactos para mercancía frágil o de alto valor.',
+  },
+  {
+    titulo: 'Embalajes de madera para exportación',
+    acento: 'roble' as const,
+    imagen: imgEmbalajes,
+    alt: 'Nave de producción con tarimas apiladas bajo haces de luz natural',
+    cuerpo: 'Embalaje industrial con tratamiento térmico y sello NOM-144 e ISPM-15, aprobado para transporte seguro.',
+  },
+];
+---
+
+<section id="empaque" class="seccion empaque">
+  <div class="contenedor">
+    <div class="seccion-cabecera rv">
+      <span class="etiqueta-marca">EMPAQUE INDUSTRIAL</span>
+      <h2 class="titulo-seccion" style="margin-top:0.9rem">
+        Cajas, huacales y embalaje industrial de madera
+      </h2>
+      <p class="texto-guia">
+        Diseños robustos para cargas frágiles, maquinaria o mercancía de alto valor, hechos a la
+        medida de lo que envías.
+      </p>
+    </div>
+
+    <div class="empaque__grid">
+      {
+        productos.map((p, i) => (
+          <div class="rv" style={`transition-delay:${i * 70}ms`}>
+            <TarjetaConImagen titulo={p.titulo} imagen={p.imagen} alt={p.alt} acento={p.acento}>
+              {p.cuerpo}
+            </TarjetaConImagen>
+          </div>
+        ))
+      }
+    </div>
+
+    <a class="boton boton--azul rv" href="#cotizacion">Cotizar Ahora</a>
+  </div>
+</section>
+
+<style>
+  .empaque {
+    background: var(--natural);
+  }
+
+  .empaque__grid {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .empaque > .contenedor > .boton {
+    margin-top: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .empaque__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .empaque__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

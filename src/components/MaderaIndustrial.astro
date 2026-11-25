@@ -1,0 +1,142 @@
+---
+import { Image } from 'astro:assets';
+import imagen from '../assets/images/detalle-tablones-madera.png';
+import TarjetaProducto from './TarjetaProducto.astro';
+import WoodGrain from './WoodGrain.astro';
+
+const productos = [
+  { titulo: 'Madera para tarimas', acento: 'nogal' as const, cuerpo: 'Pino en medidas para fabricar o reparar tarimas.' },
+  {
+    titulo: 'Madera para embalaje',
+    acento: 'wengue' as const,
+    cuerpo: 'Para cajas, huacales y madera para embalaje de exportación.',
+  },
+  {
+    titulo: 'Madera de pino industrial',
+    acento: 'roble' as const,
+    cuerpo: 'Maderas industriales para empaque, construcción de bases y uso en planta.',
+  },
+  {
+    titulo: 'Madera tratada industrial',
+    acento: 'azul' as const,
+    cuerpo: 'Madera certificada con tratamiento térmico, lista para embalaje de exportación.',
+  },
+  { titulo: 'Madera cepillada', acento: 'nogal' as const, cuerpo: 'Acabado uniforme para piezas que lo requieren.' },
+  { titulo: 'Triplay industrial', acento: 'wengue' as const, cuerpo: 'Para tapas, bases y embalaje cerrado.' },
+];
+---
+
+<section id="madera" class="seccion madera">
+  <div class="madera__hero rv">
+    <Image
+      src={imagen}
+      alt="Vista cercana de tablones de madera industrial apilados, mostrando la veta y el corte uniforme"
+      widths={[640, 960, 1400, 1920]}
+      sizes="100vw"
+      loading="lazy"
+      class="madera__imagen"
+    />
+    <div class="madera__degradado" aria-hidden="true"></div>
+    <div class="madera__veta" aria-hidden="true">
+      <WoodGrain corner="top-right" color="rgba(255,171,0,0.45)" />
+    </div>
+    <div class="contenedor madera__texto">
+      <span class="etiqueta-marca">MADERA INDUSTRIAL</span>
+      <h2 class="titulo-seccion" style="margin-top:0.9rem; color:var(--blanco)">
+        Madera para tarimas, embalaje e industria
+      </h2>
+      <p class="texto-guia" style="color:rgba(255,255,255,0.86)">
+        La misma madera con la que fabricamos nuestras tarimas y embalaje, disponible para tu
+        planta o taller.
+      </p>
+    </div>
+  </div>
+
+  <div class="contenedor">
+    <div class="madera__lista">
+      {
+        productos.map((p, i) => (
+          <div class="rv" style={`transition-delay:${(i % 3) * 70}ms`}>
+            <TarjetaProducto titulo={p.titulo} acento={p.acento} compacta>
+              {p.cuerpo}
+            </TarjetaProducto>
+          </div>
+        ))
+      }
+    </div>
+
+    <a class="boton boton--azul rv" href="#cotizacion">Cotizar Ahora</a>
+  </div>
+</section>
+
+<style>
+  .madera {
+    background: var(--papel-calido);
+  }
+
+  .madera__hero {
+    position: relative;
+    isolation: isolate;
+    min-height: clamp(16rem, 32vw, 22rem);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    margin-bottom: var(--space-6);
+  }
+
+  .madera__hero :global(.madera__imagen) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+    z-index: -2;
+  }
+
+  .madera__degradado {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(0deg, rgba(8, 6, 4, 0.9) 0%, rgba(8, 6, 4, 0.55) 55%, rgba(8, 6, 4, 0.25) 100%);
+  }
+
+  .madera__veta {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(30vw, 18rem);
+    aspect-ratio: 1;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .madera__texto {
+    padding-block: var(--space-5) var(--space-5);
+  }
+
+  .madera__texto .texto-guia {
+    max-width: 48ch;
+  }
+
+  .madera__lista {
+    display: grid;
+    gap: var(--space-4) var(--space-5);
+  }
+
+  .madera > .contenedor > .boton {
+    margin-top: var(--space-6);
+  }
+
+  @media (min-width: 720px) {
+    .madera__lista {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .madera__lista {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import NuestrasTarimas from '../components/NuestrasTarimas.astro';
+import EmpaqueIndustrial from '../components/EmpaqueIndustrial.astro';
+import MaderaIndustrial from '../components/MaderaIndustrial.astro';
+import PorQueMega from '../components/PorQueMega.astro';
+import Certificaciones from '../components/Certificaciones.astro';
+import Proceso from '../components/Proceso.astro';
+import Cobertura from '../components/Cobertura.astro';
+import FormularioCotizacion from '../components/FormularioCotizacion.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+
+const titulo = 'MEGA Tarimas — Soluciones en madera para la industria';
+const descripcion =
+  'Fabricantes de tarimas industriales de madera estándar, reforzadas y a la medida, tratadas térmicamente y certificadas NOM-144 e ISPM-15 para exportación.';
+---
+
+<Layout title={titulo} description={descripcion}>
+  <Header />
+  <main id="contenido">
+    <Hero />
+    <NuestrasTarimas />
+    <EmpaqueIndustrial />
+    <MaderaIndustrial />
+    <PorQueMega />
+    <Certificaciones />
+    <Proceso />
+    <Cobertura />
+    <FormularioCotizacion />
+    <FAQ />
+  </main>
+  <Footer />
+</Layout>

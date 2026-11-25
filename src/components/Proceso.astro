@@ -1,0 +1,153 @@
+---
+import { Image } from 'astro:assets';
+import imagen from '../assets/images/operador-maquina-tarimas.png';
+import Icono from './Icono.astro';
+
+const pasos = [
+  {
+    numero: '1',
+    titulo: '1- Envíanos tu requerimiento',
+    cuerpo: 'Medidas, capacidad de carga, volumen mensual y destino.',
+  },
+  {
+    numero: '2',
+    titulo: '2- Recibe diseño y precio',
+    cuerpo: 'Un asesor te propone la tarima adecuada y su cotización.',
+  },
+  {
+    numero: '3',
+    titulo: '3- Producimos y entregamos',
+    cuerpo: 'Fabricamos y llevamos tu pedido con flota propia.',
+  },
+];
+---
+
+<section id="proceso" class="seccion proceso">
+  <div class="contenedor">
+    <div class="proceso__banner rv">
+      <Image
+        src={imagen}
+        alt="Operario de MEGA Tarimas manejando maquinaria de producción en la planta"
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 960px) 70vw, 92vw"
+        loading="lazy"
+        class="proceso__imagen"
+      />
+    </div>
+
+    <div class="seccion-cabecera seccion-cabecera--ancha rv" style="margin-inline:auto; text-align:center;">
+      <h2 class="titulo-seccion" style="max-width:none">Cotiza tarimas o embalajes en 3 pasos</h2>
+    </div>
+
+    <ol class="proceso__linea">
+      {
+        pasos.map((p, i) => (
+          <li class="proceso__paso rv" style={`transition-delay:${i * 90}ms`}>
+            <span class="proceso__badge" aria-hidden="true">
+              {p.numero}
+            </span>
+            <h3>{p.titulo}</h3>
+            <p>{p.cuerpo}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="proceso__cta rv">
+      <a
+        class="boton boton--amarillo"
+        href="https://wa.me/528183013487"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icono nombre="whatsapp" />
+        Cotizar por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proceso {
+    background: var(--papel-calido);
+  }
+
+  .proceso__banner {
+    border-radius: var(--radio-md);
+    overflow: hidden;
+    margin-bottom: var(--space-5);
+    margin-inline: auto;
+    max-width: 52rem;
+  }
+
+  .proceso__imagen {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    object-fit: cover;
+    object-position: center 35%;
+  }
+
+  .proceso__linea {
+    margin-top: var(--space-6);
+    display: grid;
+    gap: var(--space-5);
+    counter-reset: paso;
+  }
+
+  .proceso__paso {
+    position: relative;
+    padding-top: var(--space-4);
+  }
+
+  .proceso__paso::before {
+    content: '';
+    position: absolute;
+    top: 1.35rem;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--amarillo), var(--borde-calido));
+  }
+
+  .proceso__paso:last-child::before {
+    background: var(--amarillo);
+  }
+
+  .proceso__badge {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+    background: var(--tinta);
+    color: var(--amarillo);
+    font-weight: var(--peso-extrabold);
+    font-size: 1.15rem;
+  }
+
+  .proceso__paso h3 {
+    margin-top: var(--space-3);
+    font-size: 1.2rem;
+  }
+
+  .proceso__paso p {
+    margin-top: 0.5rem;
+    color: var(--tinta-suave);
+    max-width: 32ch;
+  }
+
+  .proceso__cta {
+    margin-top: var(--space-6);
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 820px) {
+    .proceso__linea {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
