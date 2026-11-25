@@ -22,11 +22,15 @@ const rings: string[] = [
   'M286.85,0 C286.74,6.28 287.14,25.12 286.16,37.67 C285.18,50.22 283.60,62.90 280.98,75.29 C278.36,87.68 274.92,100.11 270.45,112.02 C265.98,123.93 260.48,135.67 254.18,146.75 C247.88,157.83 240.53,168.50 232.64,178.51 C224.75,188.52 215.98,197.98 206.82,206.82 C197.66,215.66 187.86,223.94 177.68,231.55 C167.50,239.16 156.81,246.24 145.77,252.48 C134.73,258.72 123.20,264.35 111.42,268.99 C99.64,273.63 87.41,277.48 75.12,280.34 C62.83,283.20 50.19,285.09 37.67,286.17 C25.15,287.25 6.28,286.74 0.00,286.85',
 ];
 
+// El arco base dibuja su "pivote" (el centro de los anillos) en la esquina
+// superior izquierda del viewBox, con las curvas abriéndose hacia abajo a la
+// derecha. Girarlo lleva ese pivote a la esquina indicada, de modo que las
+// curvas siempre se abran hacia el centro del contenedor.
 const rotation: Record<string, number> = {
-  'top-left': 90,
-  'top-right': 180,
-  'bottom-right': 270,
-  'bottom-left': 0,
+  'top-left': 0,
+  'top-right': 90,
+  'bottom-right': 180,
+  'bottom-left': 270,
 };
 ---
 

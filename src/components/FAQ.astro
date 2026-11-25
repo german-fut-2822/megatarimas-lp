@@ -1,5 +1,6 @@
 ---
 import Icono from './Icono.astro';
+import WoodGrain from './WoodGrain.astro';
 
 const preguntas = [
   {
@@ -30,9 +31,14 @@ const preguntas = [
 ---
 
 <section id="faq" class="seccion faq">
+  <div class="faq__veta" aria-hidden="true">
+    <WoodGrain corner="bottom-right" color="rgba(76,38,25,0.35)" />
+  </div>
+
   <div class="contenedor faq__grid">
     <div class="seccion-cabecera rv">
-      <h2 class="titulo-seccion">Preguntas frecuentes</h2>
+      <span class="etiqueta-marca">PREGUNTAS</span>
+      <h2 class="titulo-seccion" style="margin-top:0.9rem">Preguntas frecuentes</h2>
     </div>
 
     <div class="faq__lista">
@@ -53,7 +59,20 @@ const preguntas = [
 
 <style>
   .faq {
-    background: var(--papel-calido);
+    position: relative;
+    isolation: isolate;
+    background: var(--natural);
+    overflow: hidden;
+  }
+
+  .faq__veta {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: min(34vw, 22rem);
+    aspect-ratio: 1;
+    z-index: -1;
+    pointer-events: none;
   }
 
   .faq__grid {
@@ -63,14 +82,20 @@ const preguntas = [
   .faq__lista {
     margin-top: var(--space-4);
     display: grid;
-    gap: var(--space-2);
+    gap: var(--space-3);
   }
 
   .faq__item {
     background: var(--blanco);
-    border: 1px solid var(--borde-calido);
+    border-left: 3px solid var(--amarillo);
     border-radius: var(--radio-md);
     padding: 0.4rem var(--space-3);
+    box-shadow: var(--sombra-suave);
+    transition: box-shadow var(--dur-base) var(--ease-estandar);
+  }
+
+  .faq__item[open] {
+    box-shadow: 0 28px 48px -24px rgba(28, 18, 13, 0.45);
   }
 
   .faq__item summary {
@@ -79,7 +104,7 @@ const preguntas = [
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3);
-    padding-block: 0.9rem;
+    padding-block: 1rem;
     font-weight: var(--peso-bold);
     cursor: pointer;
   }

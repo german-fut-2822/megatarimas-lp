@@ -32,26 +32,24 @@ const razones = [
 ---
 
 <section id="por-que" class="seccion porque">
-  <div class="contenedor porque__grid">
-    <div class="porque__intro">
-      <div class="seccion-cabecera rv">
-        <span class="etiqueta-marca">POR QUÉ MEGA TARIMAS</span>
-        <h2 class="titulo-seccion" style="margin-top:0.9rem">
-          El proveedor de tarimas de madera que tu operación necesita
-        </h2>
-        <p class="texto-guia">Producción, inventario y entrega en una sola empresa.</p>
-      </div>
+  <div class="contenedor">
+    <div class="seccion-cabecera seccion-cabecera--ancha rv" style="margin-inline:auto; text-align:center;">
+      <span class="etiqueta-marca">POR QUÉ MEGA TARIMAS</span>
+      <h2 class="titulo-seccion" style="margin-top:0.9rem; max-width:none">
+        El proveedor de tarimas de madera que tu operación necesita
+      </h2>
+      <p class="texto-guia" style="margin-inline:auto">Producción, inventario y entrega en una sola empresa.</p>
+    </div>
 
-      <div class="porque__media rv">
-        <Image
-          src={imagen}
-          alt="Montacargas trasladando un bloque de tablones de madera recién cortados dentro de la nave de producción"
-          widths={[420, 640, 860]}
-          sizes="(min-width: 960px) 26vw, 92vw"
-          loading="lazy"
-          class="porque__imagen"
-        />
-      </div>
+    <div class="porque__banner rv">
+      <Image
+        src={imagen}
+        alt="Montacargas trasladando un bloque de tablones de madera recién cortados dentro de la nave de producción"
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 960px) 70vw, 92vw"
+        loading="lazy"
+        class="porque__imagen"
+      />
     </div>
 
     <div class="porque__lista">
@@ -75,22 +73,21 @@ const razones = [
 </section>
 
 <style>
-  .porque__grid {
-    display: grid;
-    gap: var(--space-5);
-  }
-
-  .porque__media {
-    margin-top: var(--space-4);
+  .porque__banner {
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-6);
+    margin-inline: auto;
+    max-width: 52rem;
     border-radius: var(--radio-md);
     overflow: hidden;
   }
 
   .porque__imagen {
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 21 / 9;
     object-fit: cover;
-    aspect-ratio: 4 / 3;
+    object-position: center 42%;
   }
 
   .porque__lista {
@@ -147,9 +144,8 @@ const razones = [
   }
 
   @media (min-width: 960px) {
-    .porque__grid {
-      grid-template-columns: 0.8fr 1.2fr;
-      align-items: start;
+    .porque__lista {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 </style>

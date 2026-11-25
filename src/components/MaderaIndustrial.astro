@@ -26,21 +26,22 @@ const productos = [
 ];
 ---
 
-<section id="madera" class="seccion madera">
-  <div class="madera__hero rv">
-    <Image
-      src={imagen}
-      alt="Vista cercana de tablones de madera industrial apilados, mostrando la veta y el corte uniforme"
-      widths={[640, 960, 1400, 1920]}
-      sizes="100vw"
-      loading="lazy"
-      class="madera__imagen"
-    />
-    <div class="madera__degradado" aria-hidden="true"></div>
-    <div class="madera__veta" aria-hidden="true">
-      <WoodGrain corner="top-right" color="rgba(255,171,0,0.45)" />
-    </div>
-    <div class="contenedor madera__texto">
+<section id="madera" class="madera">
+  <Image
+    src={imagen}
+    alt="Vista cercana de tablones de madera industrial apilados, mostrando la veta y el corte uniforme"
+    widths={[640, 960, 1400, 1920]}
+    sizes="100vw"
+    loading="lazy"
+    class="madera__fondo"
+  />
+  <div class="madera__degradado" aria-hidden="true"></div>
+  <div class="madera__veta" aria-hidden="true">
+    <WoodGrain corner="top-right" color="rgba(255,171,0,0.45)" />
+  </div>
+
+  <div class="contenedor madera__interior">
+    <div class="madera__encabezado rv">
       <span class="etiqueta-marca">MADERA INDUSTRIAL</span>
       <h2 class="titulo-seccion" style="margin-top:0.9rem; color:var(--blanco)">
         Madera para tarimas, embalaje e industria
@@ -50,9 +51,7 @@ const productos = [
         planta o taller.
       </p>
     </div>
-  </div>
 
-  <div class="contenedor">
     <div class="madera__lista">
       {
         productos.map((p, i) => (
@@ -71,20 +70,13 @@ const productos = [
 
 <style>
   .madera {
-    background: var(--papel-calido);
-  }
-
-  .madera__hero {
     position: relative;
     isolation: isolate;
-    min-height: clamp(16rem, 32vw, 22rem);
-    display: flex;
-    align-items: flex-end;
+    background: var(--papel-calido);
     overflow: hidden;
-    margin-bottom: var(--space-6);
   }
 
-  .madera__hero :global(.madera__imagen) {
+  .madera :global(.madera__fondo) {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -98,7 +90,13 @@ const productos = [
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(0deg, rgba(8, 6, 4, 0.9) 0%, rgba(8, 6, 4, 0.55) 55%, rgba(8, 6, 4, 0.25) 100%);
+    background: linear-gradient(
+      0deg,
+      var(--papel-calido) 0%,
+      var(--papel-calido) 56%,
+      rgba(8, 6, 4, 0.55) 78%,
+      rgba(8, 6, 4, 0.84) 100%
+    );
   }
 
   .madera__veta {
@@ -111,11 +109,15 @@ const productos = [
     pointer-events: none;
   }
 
-  .madera__texto {
-    padding-block: var(--space-5) var(--space-5);
+  .madera__interior {
+    padding-block: var(--space-7);
   }
 
-  .madera__texto .texto-guia {
+  .madera__encabezado {
+    padding-bottom: var(--space-6);
+  }
+
+  .madera__encabezado .texto-guia {
     max-width: 48ch;
   }
 
@@ -124,7 +126,7 @@ const productos = [
     gap: var(--space-4) var(--space-5);
   }
 
-  .madera > .contenedor > .boton {
+  .madera__interior > .boton {
     margin-top: var(--space-6);
   }
 

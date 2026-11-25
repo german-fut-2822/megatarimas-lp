@@ -1,15 +1,44 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo-mega-tarimas.png';
 import Icono from './Icono.astro';
+import WoodGrain from './WoodGrain.astro';
+
+const navegacion = [
+  { href: '#tarimas', texto: 'Tarimas' },
+  { href: '#empaque', texto: 'Empaque' },
+  { href: '#madera', texto: 'Madera' },
+  { href: '#certificaciones', texto: 'Certificaciones' },
+  { href: '#cobertura', texto: 'Cobertura' },
+  { href: '#faq', texto: 'Preguntas' },
+];
 ---
 
 <footer class="footer">
+  <div class="footer__veta" aria-hidden="true">
+    <WoodGrain corner="top-right" color="rgba(255,171,0,0.22)" />
+  </div>
+
   <div class="contenedor footer__grid">
     <div class="footer__marca">
-      <p class="footer__nombre">MEGA TARIMAS</p>
+      <Image src={logo} alt="MEGA Tarimas" width={140} height={58} class="footer__logo" />
       <p class="footer__descripcion">
         Tarimas, cajas, huacales y embalaje de madera para exportación, logística e industria.
       </p>
     </div>
+
+    <nav class="footer__col" aria-label="Navegación del footer">
+      <h2 class="footer__titulo">Navegación</h2>
+      <ul class="footer__nav">
+        {
+          navegacion.map((n) => (
+            <li>
+              <a href={n.href}>{n.texto}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
 
     <div class="footer__col">
       <h2 class="footer__titulo">Ubicación</h2>
@@ -42,9 +71,23 @@ import Icono from './Icono.astro';
 
 <style>
   .footer {
+    position: relative;
+    isolation: isolate;
     background: var(--tinta);
     color: var(--natural);
-    padding-block: var(--space-6) var(--space-4);
+    padding-block: var(--space-7) var(--space-4);
+    overflow: hidden;
+    border-top: 3px solid var(--amarillo);
+  }
+
+  .footer__veta {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(34vw, 22rem);
+    aspect-ratio: 1;
+    z-index: -1;
+    pointer-events: none;
   }
 
   .footer__grid {
@@ -52,15 +95,14 @@ import Icono from './Icono.astro';
     gap: var(--space-5);
   }
 
-  .footer__nombre {
-    font-weight: var(--peso-extrabold);
-    font-size: 1.5rem;
-    color: var(--blanco);
-    letter-spacing: -0.01em;
+  .footer__logo {
+    height: 2.4rem;
+    width: auto;
+    border-radius: var(--radio-sm);
   }
 
   .footer__descripcion {
-    margin-top: var(--space-2);
+    margin-top: var(--space-3);
     color: rgba(231, 213, 196, 0.78);
     max-width: 34ch;
   }
@@ -68,7 +110,22 @@ import Icono from './Icono.astro';
   .footer__titulo {
     font-size: 1rem;
     color: var(--amarillo);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+
+  .footer__nav {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .footer__nav a {
+    text-decoration: none;
+    color: rgba(231, 213, 196, 0.88);
+    transition: color var(--dur-rapida) var(--ease-estandar);
+  }
+
+  .footer__nav a:hover {
+    color: var(--amarillo);
   }
 
   .footer__item {
@@ -110,7 +167,7 @@ import Icono from './Icono.astro';
 
   @media (min-width: 720px) {
     .footer__grid {
-      grid-template-columns: 1.2fr 1fr 1fr;
+      grid-template-columns: 1.3fr 0.8fr 1fr 1fr;
     }
   }
 </style>

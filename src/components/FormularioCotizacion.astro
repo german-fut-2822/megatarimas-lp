@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import imagen from '../assets/images/operario-corte-madera-medida.png';
+import imagen from '../assets/images/nave-tarimas-luz.png';
 
 const opciones = [
   'Estándar 48 × 40 in',
@@ -12,81 +12,84 @@ const opciones = [
 ];
 ---
 
-<section id="cotizacion" class="seccion cotizacion">
-  <div class="contenedor cotizacion__grid">
-    <div class="cotizacion__encabezado">
-      <div class="seccion-cabecera rv" style="margin-bottom:0">
-        <h2 class="titulo-seccion">Cotización de tarimas y embalaje de madera</h2>
-        <p class="texto-guia">
-          Cuéntanos qué necesitas y un asesor te responde con propuesta y precio.
-        </p>
-      </div>
+<section id="cotizacion" class="cotizacion">
+  <div class="cotizacion__layout">
+    <div class="cotizacion__panel-form">
+      <div class="contenedor cotizacion__interior">
+        <div class="seccion-cabecera rv">
+          <h2 class="titulo-seccion">Cotización de tarimas y embalaje de madera</h2>
+          <p class="texto-guia">
+            Cuéntanos qué necesitas y un asesor te responde con propuesta y precio.
+          </p>
+        </div>
 
-      <div class="cotizacion__media rv">
-        <Image
-          src={imagen}
-          alt="Operario ajustando con precisión un tablón de madera para una cotización a la medida"
-          widths={[320, 480, 640]}
-          sizes="(min-width: 960px) 26vw, 90vw"
-          loading="lazy"
-          class="cotizacion__imagen"
-        />
+        <!--
+          TODO: conectar este formulario a un endpoint/servicio de envío cuando el
+          cliente lo proporcione. Por ahora el envío solo se intercepta en el
+          navegador (ver script abajo) y no se transmite a ningún destino.
+        -->
+        <form class="formulario rv" id="formulario-cotizacion">
+          <div class="formulario__campo">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required />
+          </div>
+
+          <div class="formulario__campo">
+            <label for="empresa">Empresa</label>
+            <input type="text" id="empresa" name="empresa" autocomplete="organization" />
+          </div>
+
+          <div class="formulario__campo">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" required />
+          </div>
+
+          <div class="formulario__campo">
+            <label for="correo">Correo Empresarial</label>
+            <input type="email" id="correo" name="correo" autocomplete="email" required />
+          </div>
+
+          <div class="formulario__campo formulario__campo--ancho">
+            <label for="necesidad">¿Qué necesitas?</label>
+            <select id="necesidad" name="necesidad" required>
+              <option value="" disabled selected hidden>Selecciona una opción</option>
+              {opciones.map((o) => <option value={o}>{o}</option>)}
+            </select>
+          </div>
+
+          <div class="formulario__campo">
+            <label for="piezas">Piezas al mes (aprox.)</label>
+            <input type="number" id="piezas" name="piezas" min="0" inputmode="numeric" />
+          </div>
+
+          <div class="formulario__campo">
+            <label for="ciudad">Ciudad de entrega</label>
+            <input type="text" id="ciudad" name="ciudad" autocomplete="address-level2" />
+          </div>
+
+          <div class="formulario__campo formulario__campo--ancho">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+          </div>
+
+          <div class="formulario__campo formulario__campo--ancho">
+            <button type="submit" class="boton boton--amarillo">Solicitar cotización Ahora</button>
+          </div>
+        </form>
       </div>
     </div>
 
-    <!--
-      TODO: conectar este formulario a un endpoint/servicio de envío cuando el
-      cliente lo proporcione. Por ahora el envío solo se intercepta en el
-      navegador (ver script abajo) y no se transmite a ningún destino.
-    -->
-    <form class="formulario rv" id="formulario-cotizacion">
-      <div class="formulario__campo">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" autocomplete="name" required />
-      </div>
-
-      <div class="formulario__campo">
-        <label for="empresa">Empresa</label>
-        <input type="text" id="empresa" name="empresa" autocomplete="organization" />
-      </div>
-
-      <div class="formulario__campo">
-        <label for="telefono">Teléfono</label>
-        <input type="tel" id="telefono" name="telefono" autocomplete="tel" required />
-      </div>
-
-      <div class="formulario__campo">
-        <label for="correo">Correo Empresarial</label>
-        <input type="email" id="correo" name="correo" autocomplete="email" required />
-      </div>
-
-      <div class="formulario__campo formulario__campo--ancho">
-        <label for="necesidad">¿Qué necesitas?</label>
-        <select id="necesidad" name="necesidad" required>
-          <option value="" disabled selected hidden>Selecciona una opción</option>
-          {opciones.map((o) => <option value={o}>{o}</option>)}
-        </select>
-      </div>
-
-      <div class="formulario__campo">
-        <label for="piezas">Piezas al mes (aprox.)</label>
-        <input type="number" id="piezas" name="piezas" min="0" inputmode="numeric" />
-      </div>
-
-      <div class="formulario__campo">
-        <label for="ciudad">Ciudad de entrega</label>
-        <input type="text" id="ciudad" name="ciudad" autocomplete="address-level2" />
-      </div>
-
-      <div class="formulario__campo formulario__campo--ancho">
-        <label for="mensaje">Mensaje</label>
-        <textarea id="mensaje" name="mensaje" rows="4"></textarea>
-      </div>
-
-      <div class="formulario__campo formulario__campo--ancho">
-        <button type="submit" class="boton boton--amarillo">Solicitar cotización Ahora</button>
-      </div>
-    </form>
+    <div class="cotizacion__panel-imagen rv" aria-hidden="true">
+      <Image
+        src={imagen}
+        alt=""
+        widths={[480, 720, 960, 1280]}
+        sizes="(min-width: 960px) 40vw, 100vw"
+        loading="lazy"
+        class="cotizacion__imagen"
+      />
+      <div class="cotizacion__degradado"></div>
+    </div>
   </div>
 </section>
 
@@ -95,28 +98,46 @@ const opciones = [
     background: var(--papel);
   }
 
-  .cotizacion__encabezado {
+  .cotizacion__layout {
     display: grid;
-    gap: var(--space-4);
-    align-items: center;
-    margin-bottom: var(--space-5);
+    grid-template-columns: 1fr;
   }
 
-  .cotizacion__media {
-    border-radius: var(--radio-md);
-    overflow: hidden;
+  .cotizacion__panel-form {
+    display: flex;
+    align-items: center;
+  }
+
+  .cotizacion__interior {
+    padding-block: var(--space-7);
+  }
+
+  .cotizacion__panel-imagen {
+    position: relative;
+    isolation: isolate;
+    min-height: 18rem;
   }
 
   .cotizacion__imagen {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    aspect-ratio: 16 / 10;
+    height: 100%;
     object-fit: cover;
+    z-index: -2;
   }
 
-  @media (min-width: 960px) {
-    .cotizacion__encabezado {
-      grid-template-columns: 1.3fr 0.7fr;
-    }
+  .cotizacion__degradado {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      0deg,
+      var(--nogal) 0%,
+      rgba(76, 38, 25, 0.88) 18%,
+      rgba(76, 38, 25, 0.3) 55%,
+      rgba(76, 38, 25, 0) 80%
+    );
   }
 
   .formulario {
@@ -128,6 +149,7 @@ const opciones = [
     padding: var(--space-5);
     border-radius: var(--radio-md);
     border: 1px solid var(--borde-calido);
+    box-shadow: var(--sombra-suave);
   }
 
   .formulario__campo {
@@ -181,6 +203,26 @@ const opciones = [
     .formulario button[type='submit'] {
       width: auto;
       justify-self: start;
+    }
+  }
+
+  @media (min-width: 960px) {
+    .cotizacion__layout {
+      grid-template-columns: 1.25fr 1fr;
+    }
+
+    .cotizacion__panel-imagen {
+      min-height: 100%;
+    }
+
+    .cotizacion__degradado {
+      background: linear-gradient(
+        90deg,
+        var(--nogal) 0%,
+        rgba(76, 38, 25, 0.88) 14%,
+        rgba(76, 38, 25, 0.3) 45%,
+        rgba(76, 38, 25, 0) 70%
+      );
     }
   }
 </style>

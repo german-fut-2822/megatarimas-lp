@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
-import imagen from '../assets/images/operador-maquina-tarimas.png';
+import imgRequerimiento from '../assets/images/operario-corte-madera-medida.png';
+import imgDiseno from '../assets/images/planta-tarimas-apiladas.png';
+import imgEntrega from '../assets/images/montacargas-tablones-nave.png';
 import Icono from './Icono.astro';
 
 const pasos = [
@@ -8,33 +10,28 @@ const pasos = [
     numero: '1',
     titulo: '1- Envíanos tu requerimiento',
     cuerpo: 'Medidas, capacidad de carga, volumen mensual y destino.',
+    imagen: imgRequerimiento,
+    alt: 'Operario midiendo con precisión un tablón de madera',
   },
   {
     numero: '2',
     titulo: '2- Recibe diseño y precio',
     cuerpo: 'Un asesor te propone la tarima adecuada y su cotización.',
+    imagen: imgDiseno,
+    alt: 'Tarimas de madera estándar apiladas en la nave de producción',
   },
   {
     numero: '3',
     titulo: '3- Producimos y entregamos',
     cuerpo: 'Fabricamos y llevamos tu pedido con flota propia.',
+    imagen: imgEntrega,
+    alt: 'Montacargas trasladando tablones de madera para su entrega',
   },
 ];
 ---
 
 <section id="proceso" class="seccion proceso">
   <div class="contenedor">
-    <div class="proceso__banner rv">
-      <Image
-        src={imagen}
-        alt="Operario de MEGA Tarimas manejando maquinaria de producción en la planta"
-        widths={[640, 960, 1280]}
-        sizes="(min-width: 960px) 70vw, 92vw"
-        loading="lazy"
-        class="proceso__imagen"
-      />
-    </div>
-
     <div class="seccion-cabecera seccion-cabecera--ancha rv" style="margin-inline:auto; text-align:center;">
       <h2 class="titulo-seccion" style="max-width:none">Cotiza tarimas o embalajes en 3 pasos</h2>
     </div>
@@ -46,6 +43,16 @@ const pasos = [
             <span class="proceso__badge" aria-hidden="true">
               {p.numero}
             </span>
+            <div class="proceso__media">
+              <Image
+                src={p.imagen}
+                alt={p.alt}
+                widths={[320, 480, 640, 860]}
+                sizes="(min-width: 820px) 30vw, 92vw"
+                loading="lazy"
+                class="proceso__imagen"
+              />
+            </div>
             <h3>{p.titulo}</h3>
             <p>{p.cuerpo}</p>
           </li>
@@ -72,64 +79,70 @@ const pasos = [
     background: var(--papel-calido);
   }
 
-  .proceso__banner {
-    border-radius: var(--radio-md);
-    overflow: hidden;
-    margin-bottom: var(--space-5);
-    margin-inline: auto;
-    max-width: 52rem;
-  }
-
-  .proceso__imagen {
-    width: 100%;
-    aspect-ratio: 21 / 9;
-    object-fit: cover;
-    object-position: center 35%;
-  }
-
   .proceso__linea {
-    margin-top: var(--space-6);
+    margin-top: var(--space-7);
     display: grid;
-    gap: var(--space-5);
-    counter-reset: paso;
+    gap: var(--space-7);
   }
 
   .proceso__paso {
     position: relative;
-    padding-top: var(--space-4);
-  }
-
-  .proceso__paso::before {
-    content: '';
-    position: absolute;
-    top: 1.35rem;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, var(--amarillo), var(--borde-calido));
-  }
-
-  .proceso__paso:last-child::before {
-    background: var(--amarillo);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 3.6rem;
   }
 
   .proceso__badge {
-    position: relative;
-    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.7rem;
-    height: 2.7rem;
+    width: 2.6rem;
+    height: 2.6rem;
     border-radius: 50%;
     background: var(--tinta);
     color: var(--amarillo);
     font-weight: var(--peso-extrabold);
-    font-size: 1.15rem;
+    font-size: 1.1rem;
+    border: 3px solid var(--papel-calido);
+  }
+
+  /* Riel de la línea de tiempo: vertical en móvil, horizontal en escritorio */
+  .proceso__paso:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    background: var(--amarillo);
+    z-index: 1;
+  }
+
+  .proceso__paso:not(:last-child)::after {
+    top: 1.3rem;
+    left: 50%;
+    width: 2px;
+    height: calc(100% + var(--space-7) - 1.3rem);
+    transform: translateX(-50%);
+  }
+
+  .proceso__media {
+    width: 100%;
+  }
+
+  .proceso__imagen {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radio-md);
   }
 
   .proceso__paso h3 {
-    margin-top: var(--space-3);
+    margin-top: var(--space-4);
     font-size: 1.2rem;
   }
 
@@ -148,6 +161,15 @@ const pasos = [
   @media (min-width: 820px) {
     .proceso__linea {
       grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-5);
+    }
+
+    .proceso__paso:not(:last-child)::after {
+      top: 1.3rem;
+      left: 50%;
+      width: calc(100% + var(--space-5));
+      height: 2px;
+      transform: none;
     }
   }
 </style>
