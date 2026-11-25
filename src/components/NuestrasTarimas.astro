@@ -4,32 +4,29 @@ import imgMedida from '../assets/images/operario-corte-madera-medida.png';
 import imgExportacion from '../assets/images/sello-tratamiento-termico.png';
 import imgAutomotriz from '../assets/images/operador-maquina-tarimas.png';
 import TarjetaConImagen from './TarjetaConImagen.astro';
+import TexturaFondo from './TexturaFondo.astro';
 
 const productos = [
   {
     titulo: 'Tarimas estándar 48 × 40 in',
-    acento: 'nogal' as const,
     imagen: imgEstandar,
     alt: 'Tarimas de madera estándar apiladas en hileras dentro de la nave de producción',
     cuerpo: 'La medida más usada en almacén y distribución, con producción diaria para pedidos de mayoreo.',
   },
   {
     titulo: 'Tarimas a la medida',
-    acento: 'wengue' as const,
     imagen: imgMedida,
     alt: 'Operario ajustando con precisión un tablón de madera en una máquina de corte',
     cuerpo: 'Fabricación de tarimas a medida según tus dimensiones, capacidad de carga y requisitos de tu línea.',
   },
   {
     titulo: 'Tarimas para exportación',
-    acento: 'roble' as const,
     imagen: imgExportacion,
     alt: 'Sello de tratamiento térmico HT estampado sobre una tarima de madera',
     cuerpo: 'Tarimas tratadas térmicamente y certificadas NOM-144 e ISPM-15 para que tus envíos crucen sin contratiempos.',
   },
   {
     titulo: 'Tarimas para industria automotriz',
-    acento: 'azul' as const,
     imagen: imgAutomotriz,
     alt: 'Operario manejando maquinaria industrial de precisión en la línea de producción',
     cuerpo: 'Resistencia y estabilidad para maquinaria, partes y componentes pesados en carga y almacén.',
@@ -38,8 +35,9 @@ const productos = [
 ---
 
 <section id="tarimas" class="seccion tarimas">
+  <TexturaFondo intensidad={0.18} posicion="center 42%" />
   <div class="contenedor">
-    <div class="seccion-cabecera rv">
+    <div class="seccion-cabecera rv rv--left">
       <h2 class="titulo-seccion">Nuestras Tarimas</h2>
       <p class="texto-guia">
         Fabricamos pallets de madera estándar o sobre diseño, pensados para almacén, carga
@@ -50,8 +48,8 @@ const productos = [
     <div class="tarimas__grid">
       {
         productos.map((p, i) => (
-          <div class="rv" style={`transition-delay:${i * 70}ms`}>
-            <TarjetaConImagen titulo={p.titulo} imagen={p.imagen} alt={p.alt} acento={p.acento}>
+          <div class="rv rv--scale" style={`transition-delay:${i * 90}ms`}>
+            <TarjetaConImagen titulo={p.titulo} imagen={p.imagen} alt={p.alt}>
               {p.cuerpo}
             </TarjetaConImagen>
           </div>
@@ -59,11 +57,22 @@ const productos = [
       }
     </div>
 
-    <a class="boton boton--azul rv" href="#cotizacion">Cotizar Ahora</a>
+    <a class="boton boton--amarillo rv" href="#cotizacion">Cotizar Ahora</a>
   </div>
 </section>
 
 <style>
+  .tarimas {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .tarimas > .contenedor {
+    position: relative;
+    z-index: 1;
+  }
+
   .tarimas__grid {
     display: grid;
     gap: var(--space-4);
@@ -79,9 +88,10 @@ const productos = [
     }
   }
 
-  @media (min-width: 960px) {
+  @media (min-width: 1120px) {
     .tarimas__grid {
       grid-template-columns: repeat(4, 1fr);
     }
   }
+
 </style>

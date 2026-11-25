@@ -22,8 +22,8 @@ body {
   font-weight: var(--peso-regular);
   font-size: var(--tamano-cuerpo);
   line-height: var(--interlineado-cuerpo);
-  color: var(--tinta);
-  background: var(--papel);
+  color: var(--texto);
+  background: var(--blanco);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -127,7 +127,7 @@ textarea {
 }
 
 .seccion {
-  padding-block: var(--space-7);
+  padding-block: clamp(4.75rem, 8vw, 7rem);
 }
 
 section[id] {
@@ -136,7 +136,7 @@ section[id] {
 
 .seccion-cabecera {
   max-width: 44rem;
-  margin-bottom: var(--space-5);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
 .seccion-cabecera--ancha {
@@ -148,7 +148,7 @@ section[id] {
   align-items: center;
   gap: var(--space-1);
   background: var(--amarillo);
-  color: var(--tinta);
+  color: var(--carbon);
   font-weight: var(--peso-bold);
   font-size: var(--tamano-pequeno);
   padding: 0.4rem 1rem;
@@ -157,13 +157,13 @@ section[id] {
 
 .titulo-seccion {
   font-size: var(--tamano-h2);
-  color: var(--tinta);
+  color: var(--texto);
   max-width: 20ch;
 }
 
 .texto-guia {
   font-size: var(--tamano-lead);
-  color: var(--tinta-suave);
+  color: var(--texto-suave);
   margin-top: var(--space-2);
   max-width: 50ch;
 }
@@ -180,8 +180,9 @@ section[id] {
   text-decoration: none;
   border: none;
   border-radius: var(--radio-pill);
-  padding: 1rem 1.75rem;
-  min-height: 44px;
+  padding: 0.85rem 1.5rem;
+  min-width: 11.5rem;
+  min-height: 48px;
   transition:
     transform var(--dur-rapida) var(--ease-estandar),
     box-shadow var(--dur-rapida) var(--ease-estandar),
@@ -200,12 +201,13 @@ section[id] {
 
 .boton--amarillo {
   background: var(--amarillo);
-  color: var(--tinta);
+  color: var(--carbon);
   box-shadow: var(--sombra-boton);
 }
 
 .boton--amarillo:hover {
-  background: var(--amarillo-fuerte);
+  background: var(--amarillo);
+  box-shadow: 0 18px 34px -12px rgba(255, 171, 0, 0.68);
 }
 
 .boton--contorno {
@@ -217,15 +219,6 @@ section[id] {
 .boton--contorno:hover {
   border-color: var(--amarillo);
   color: var(--amarillo);
-}
-
-.boton--azul {
-  background: var(--azul);
-  color: var(--blanco);
-}
-
-.boton--azul:hover {
-  background: var(--azul-profundo);
 }
 
 /* ---------- Revelado en scroll ---------- */
@@ -246,6 +239,24 @@ section[id] {
   transform: translateY(0);
 }
 
+.js .rv--left {
+  transform: translateX(-28px);
+}
+
+.js .rv--right {
+  transform: translateX(28px);
+}
+
+.js .rv--scale {
+  transform: translateY(24px) scale(0.975);
+}
+
+.js .rv--left.rv--visible,
+.js .rv--right.rv--visible,
+.js .rv--scale.rv--visible {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .js .rv {
     opacity: 1;
@@ -258,5 +269,5 @@ section[id] {
 
 ::selection {
   background: var(--amarillo);
-  color: var(--tinta);
+  color: var(--carbon);
 }

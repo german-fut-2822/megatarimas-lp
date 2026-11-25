@@ -82,7 +82,10 @@ const enlacesMovil = [
     position: sticky;
     top: 0;
     z-index: 100;
-    padding-top: clamp(0.75rem, 2vw, 1.25rem);
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--borde);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
   }
 
   .header__barra {
@@ -90,15 +93,8 @@ const enlacesMovil = [
     align-items: center;
     justify-content: space-between;
     gap: var(--space-3);
-    background: rgba(253, 250, 246, 0.97);
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-    border: 1.5px solid var(--amarillo);
-    border-radius: var(--radio-pill);
-    padding: 0.6rem 0.75rem 0.6rem 1.25rem;
-    box-shadow:
-      0 20px 44px -18px rgba(28, 18, 13, 0.5),
-      0 0 0 5px rgba(255, 171, 0, 0.12);
+    min-height: 4.75rem;
+    padding-block: 0.6rem;
   }
 
   .header__logo {
@@ -126,7 +122,7 @@ const enlacesMovil = [
     text-decoration: none;
     font-weight: var(--peso-bold);
     font-size: var(--tamano-pequeno);
-    color: var(--tinta-suave);
+    color: var(--texto-suave);
     transition: color var(--dur-rapida) var(--ease-estandar);
   }
 
@@ -141,7 +137,6 @@ const enlacesMovil = [
   }
 
   .boton--compacto {
-    padding: 0.7rem 1.25rem;
     display: none;
   }
 
@@ -152,8 +147,8 @@ const enlacesMovil = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--tinta);
-    color: var(--papel);
+    background: var(--carbon);
+    color: var(--blanco);
     border: none;
     border-radius: var(--radio-pill);
     flex-shrink: 0;
@@ -187,8 +182,8 @@ const enlacesMovil = [
     position: fixed;
     inset: 0;
     z-index: 90;
-    background: var(--tinta);
-    color: var(--papel);
+    background: var(--carbon);
+    color: var(--blanco);
     padding: clamp(6rem, 20vh, 8rem) var(--space-4) var(--space-4);
     display: flex;
     flex-direction: column;
@@ -208,7 +203,7 @@ const enlacesMovil = [
   .menu-movil__enlace {
     display: block;
     text-decoration: none;
-    color: var(--papel);
+    color: var(--blanco);
     font-weight: var(--peso-extrabold);
     font-size: clamp(1.4rem, 5vw, 1.9rem);
     padding: 0.65rem 0;

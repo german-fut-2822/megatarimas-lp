@@ -16,7 +16,7 @@ const navegacion = [
 
 <footer class="footer">
   <div class="footer__veta" aria-hidden="true">
-    <WoodGrain corner="top-right" color="rgba(255,171,0,0.22)" />
+    <WoodGrain corner="top-right" color="rgba(255,171,0,0.38)" />
   </div>
 
   <div class="contenedor footer__grid">
@@ -74,8 +74,8 @@ const navegacion = [
   .footer {
     position: relative;
     isolation: isolate;
-    background: var(--tinta);
-    color: var(--natural);
+    background: var(--carbon);
+    color: var(--blanco);
     padding-block: var(--space-7) var(--space-4);
     overflow: hidden;
     border-top: 3px solid var(--amarillo);
@@ -85,7 +85,7 @@ const navegacion = [
     position: absolute;
     top: 0;
     right: 0;
-    width: min(34vw, 22rem);
+    width: min(60vw, 42rem);
     aspect-ratio: 1;
     z-index: -1;
     pointer-events: none;
@@ -104,7 +104,7 @@ const navegacion = [
 
   .footer__descripcion {
     margin-top: var(--space-3);
-    color: rgba(231, 213, 196, 0.78);
+    color: rgba(255, 255, 255, 0.72);
     max-width: 34ch;
   }
 
@@ -121,7 +121,7 @@ const navegacion = [
 
   .footer__nav a {
     text-decoration: none;
-    color: rgba(231, 213, 196, 0.88);
+    color: rgba(255, 255, 255, 0.84);
     transition: color var(--dur-rapida) var(--ease-estandar);
   }
 
@@ -134,7 +134,7 @@ const navegacion = [
     align-items: flex-start;
     gap: 0.65rem;
     margin-top: 0.6rem;
-    color: rgba(231, 213, 196, 0.88);
+    color: rgba(255, 255, 255, 0.84);
   }
 
   .footer__item a {
@@ -163,7 +163,7 @@ const navegacion = [
     padding-top: var(--space-3);
     border-top: 1px solid var(--borde-claro-sobre-oscuro);
     font-size: var(--tamano-micro);
-    color: rgba(231, 213, 196, 0.6);
+    color: rgba(255, 255, 255, 0.58);
   }
 
   @media (min-width: 720px) {
@@ -171,4 +171,5 @@ const navegacion = [
       grid-template-columns: 1.3fr 0.8fr 1fr 1fr;
     }
   }
+
 </style>

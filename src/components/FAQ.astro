@@ -32,7 +32,7 @@ const preguntas = [
 
 <section id="faq" class="seccion faq">
   <div class="faq__veta" aria-hidden="true">
-    <WoodGrain corner="bottom-right" color="rgba(76,38,25,0.35)" />
+    <WoodGrain corner="bottom-right" color="rgba(255,171,0,0.38)" />
   </div>
 
   <div class="contenedor faq__grid">
@@ -61,15 +61,19 @@ const preguntas = [
   .faq {
     position: relative;
     isolation: isolate;
-    background: var(--natural);
+    background: var(--azul);
     overflow: hidden;
+  }
+
+  .faq .titulo-seccion {
+    color: var(--blanco);
   }
 
   .faq__veta {
     position: absolute;
     bottom: 0;
     right: 0;
-    width: min(34vw, 22rem);
+    width: min(60vw, 42rem);
     aspect-ratio: 1;
     z-index: -1;
     pointer-events: none;
@@ -127,7 +131,7 @@ const preguntas = [
 
   .faq__item p {
     padding-bottom: var(--space-3);
-    color: var(--tinta-suave);
+    color: var(--texto-suave);
     max-width: 62ch;
   }
 </style>

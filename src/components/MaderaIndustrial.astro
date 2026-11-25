@@ -5,24 +5,21 @@ import TarjetaProducto from './TarjetaProducto.astro';
 import WoodGrain from './WoodGrain.astro';
 
 const productos = [
-  { titulo: 'Madera para tarimas', acento: 'nogal' as const, cuerpo: 'Pino en medidas para fabricar o reparar tarimas.' },
+  { titulo: 'Madera para tarimas', cuerpo: 'Pino en medidas para fabricar o reparar tarimas.' },
   {
     titulo: 'Madera para embalaje',
-    acento: 'wengue' as const,
     cuerpo: 'Para cajas, huacales y madera para embalaje de exportación.',
   },
   {
     titulo: 'Madera de pino industrial',
-    acento: 'roble' as const,
     cuerpo: 'Maderas industriales para empaque, construcción de bases y uso en planta.',
   },
   {
     titulo: 'Madera tratada industrial',
-    acento: 'azul' as const,
     cuerpo: 'Madera certificada con tratamiento térmico, lista para embalaje de exportación.',
   },
-  { titulo: 'Madera cepillada', acento: 'nogal' as const, cuerpo: 'Acabado uniforme para piezas que lo requieren.' },
-  { titulo: 'Triplay industrial', acento: 'wengue' as const, cuerpo: 'Para tapas, bases y embalaje cerrado.' },
+  { titulo: 'Madera cepillada', cuerpo: 'Acabado uniforme para piezas que lo requieren.' },
+  { titulo: 'Triplay industrial', cuerpo: 'Para tapas, bases y embalaje cerrado.' },
 ];
 ---
 
@@ -55,8 +52,8 @@ const productos = [
     <div class="madera__lista">
       {
         productos.map((p, i) => (
-          <div class="rv" style={`transition-delay:${(i % 3) * 70}ms`}>
-            <TarjetaProducto titulo={p.titulo} acento={p.acento} compacta>
+          <div class="madera__producto rv rv--scale" style={`transition-delay:${i * 70}ms`}>
+            <TarjetaProducto titulo={p.titulo} compacta>
               {p.cuerpo}
             </TarjetaProducto>
           </div>
@@ -64,7 +61,7 @@ const productos = [
       }
     </div>
 
-    <a class="boton boton--azul rv" href="#cotizacion">Cotizar Ahora</a>
+    <a class="boton boton--amarillo rv" href="#cotizacion">Cotizar Ahora</a>
   </div>
 </section>
 
@@ -72,7 +69,7 @@ const productos = [
   .madera {
     position: relative;
     isolation: isolate;
-    background: var(--papel-calido);
+    background: var(--carbon);
     overflow: hidden;
   }
 
@@ -90,13 +87,9 @@ const productos = [
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(
-      0deg,
-      var(--papel-calido) 0%,
-      var(--papel-calido) 56%,
-      rgba(8, 6, 4, 0.55) 78%,
-      rgba(8, 6, 4, 0.84) 100%
-    );
+    background:
+      linear-gradient(0deg, rgba(32, 35, 38, 0.98) 0%, rgba(32, 35, 38, 0.78) 42%, rgba(32, 35, 38, 0.22) 100%),
+      linear-gradient(100deg, rgba(32, 35, 38, 0.98) 0%, rgba(32, 35, 38, 0.88) 48%, rgba(32, 35, 38, 0.2) 100%);
   }
 
   .madera__veta {
@@ -123,7 +116,11 @@ const productos = [
 
   .madera__lista {
     display: grid;
-    gap: var(--space-4) var(--space-5);
+    gap: var(--space-3);
+  }
+
+  .madera__producto {
+    height: 100%;
   }
 
   .madera__interior > .boton {
@@ -133,10 +130,17 @@ const productos = [
   @media (min-width: 720px) {
     .madera__lista {
       grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
     }
   }
 
   @media (min-width: 960px) {
+    .madera__degradado {
+      background:
+        linear-gradient(0deg, rgba(32, 35, 38, 0.9) 0%, rgba(32, 35, 38, 0.3) 56%, rgba(32, 35, 38, 0.08) 100%),
+        linear-gradient(100deg, rgba(32, 35, 38, 0.99) 0%, rgba(32, 35, 38, 0.92) 48%, rgba(32, 35, 38, 0.22) 100%);
+    }
+
     .madera__lista {
       grid-template-columns: repeat(3, 1fr);
     }

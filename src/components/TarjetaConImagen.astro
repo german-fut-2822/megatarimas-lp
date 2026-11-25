@@ -6,13 +6,12 @@ interface Props {
   titulo: string;
   imagen: ImageMetadata;
   alt: string;
-  acento?: 'nogal' | 'wengue' | 'roble' | 'azul';
 }
 
-const { titulo, imagen, alt, acento = 'nogal' } = Astro.props;
+const { titulo, imagen, alt } = Astro.props;
 ---
 
-<article class="tarjeta-img" style={`--acento-tarjeta: var(--${acento})`}>
+<article class="tarjeta-img">
   <div class="tarjeta-img__media">
     <Image
       src={imagen}
@@ -24,38 +23,100 @@ const { titulo, imagen, alt, acento = 'nogal' } = Astro.props;
       class="tarjeta-img__imagen"
     />
   </div>
-  <h3 class="tarjeta-img__titulo">{titulo}</h3>
-  <p class="tarjeta-img__cuerpo"><slot /></p>
+  <div class="tarjeta-img__contenido">
+    <h3 class="tarjeta-img__titulo">{titulo}</h3>
+    <p class="tarjeta-img__cuerpo"><slot /></p>
+  </div>
 </article>
 
 <style>
   .tarjeta-img {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    background: var(--blanco);
+    border: 1px solid rgba(1, 58, 111, 0.28);
+    border-radius: var(--radio-sm);
+    overflow: hidden;
+    box-shadow: 0 18px 42px -34px rgba(32, 35, 38, 0.7);
+    transition:
+      transform var(--dur-base) var(--ease-estandar),
+      box-shadow var(--dur-base) var(--ease-estandar),
+      border-color var(--dur-base) var(--ease-estandar);
+  }
+
+  .tarjeta-img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 28px 52px -32px rgba(32, 35, 38, 0.65);
+    border-color: var(--azul);
   }
 
   .tarjeta-img__media {
-    border-radius: var(--radio-sm);
+    position: relative;
     overflow: hidden;
-    border-top: 3px solid var(--acento-tarjeta);
+    border-top: 3px solid var(--azul);
+  }
+
+  .tarjeta-img__media::after {
+    content: '';
+    position: absolute;
+    inset: 55% 0 0;
+    background: linear-gradient(0deg, rgba(32, 35, 38, 0.28), rgba(32, 35, 38, 0));
+    pointer-events: none;
   }
 
   .tarjeta-img__imagen {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
+    transition: transform var(--dur-lenta) var(--ease-estandar);
+  }
+
+  .tarjeta-img:hover .tarjeta-img__imagen {
+    transform: scale(1.035);
+  }
+
+  .tarjeta-img__contenido {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: var(--space-4);
+  }
+
+  .tarjeta-img__contenido::after {
+    content: '';
+    display: block;
+    width: 100%;
+    margin-top: auto;
+    padding-top: var(--space-4);
+    border-bottom: 1px dashed rgba(32, 35, 38, 0.36);
   }
 
   .tarjeta-img__titulo {
-    margin-top: var(--space-2);
-    font-size: 1.05rem;
-    color: var(--tinta);
+    font-size: var(--tamano-titulo-tarjeta);
+    color: var(--texto);
   }
 
   .tarjeta-img__cuerpo {
-    margin-top: 0.4rem;
-    color: var(--tinta-suave);
+    margin-top: var(--space-2);
+    color: var(--texto-suave);
     font-size: var(--tamano-pequeno);
+    max-width: 36ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tarjeta-img,
+    .tarjeta-img__imagen {
+      transition: none;
+    }
+
+    .tarjeta-img:hover {
+      transform: none;
+    }
+
+    .tarjeta-img:hover .tarjeta-img__imagen {
+      transform: none;
+    }
   }
 </style>

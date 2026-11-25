@@ -3,11 +3,11 @@ import imgHuacales from '../assets/images/huacales-madera-exterior.png';
 import imgCajas from '../assets/images/montacargas-tablones-nave.png';
 import imgEmbalajes from '../assets/images/nave-tarimas-luz.png';
 import TarjetaConImagen from './TarjetaConImagen.astro';
+import WoodGrain from './WoodGrain.astro';
 
 const productos = [
   {
     titulo: 'Huacales de madera para exportación',
-    acento: 'nogal' as const,
     imagen: imgHuacales,
     alt: 'Huacales de madera apilados a la intemperie listos para exportación',
     cuerpo:
@@ -15,14 +15,12 @@ const productos = [
   },
   {
     titulo: 'Cajas de madera para embalaje',
-    acento: 'wengue' as const,
     imagen: imgCajas,
     alt: 'Montacargas trasladando un bloque de tablones de madera embalados en la nave',
     cuerpo: 'Cajas y crates de madera a la medida, con protección contra impactos para mercancía frágil o de alto valor.',
   },
   {
     titulo: 'Embalajes de madera para exportación',
-    acento: 'roble' as const,
     imagen: imgEmbalajes,
     alt: 'Nave de producción con tarimas apiladas bajo haces de luz natural',
     cuerpo: 'Embalaje industrial con tratamiento térmico y sello NOM-144 e ISPM-15, aprobado para transporte seguro.',
@@ -31,8 +29,12 @@ const productos = [
 ---
 
 <section id="empaque" class="seccion empaque">
+  <div class="empaque__veta" aria-hidden="true">
+    <WoodGrain corner="bottom-left" color="rgba(255,171,0,0.2)" />
+  </div>
+
   <div class="contenedor">
-    <div class="seccion-cabecera rv">
+    <div class="seccion-cabecera rv rv--right">
       <span class="etiqueta-marca">EMPAQUE INDUSTRIAL</span>
       <h2 class="titulo-seccion" style="margin-top:0.9rem">
         Cajas, huacales y embalaje industrial de madera
@@ -46,8 +48,8 @@ const productos = [
     <div class="empaque__grid">
       {
         productos.map((p, i) => (
-          <div class="rv" style={`transition-delay:${i * 70}ms`}>
-            <TarjetaConImagen titulo={p.titulo} imagen={p.imagen} alt={p.alt} acento={p.acento}>
+          <div class="rv rv--scale" style={`transition-delay:${i * 100}ms`}>
+            <TarjetaConImagen titulo={p.titulo} imagen={p.imagen} alt={p.alt}>
               {p.cuerpo}
             </TarjetaConImagen>
           </div>
@@ -55,13 +57,40 @@ const productos = [
       }
     </div>
 
-    <a class="boton boton--azul rv" href="#cotizacion">Cotizar Ahora</a>
+    <a class="boton boton--amarillo rv" href="#cotizacion">Cotizar Ahora</a>
   </div>
 </section>
 
 <style>
   .empaque {
-    background: var(--natural);
+    position: relative;
+    isolation: isolate;
+    background: var(--azul);
+    overflow: hidden;
+  }
+
+  .empaque :global(.titulo-seccion) {
+    color: var(--blanco);
+  }
+
+  .empaque :global(.texto-guia) {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .empaque > .contenedor {
+    position: relative;
+    z-index: 1;
+  }
+
+  .empaque__veta {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: min(44vw, 34rem);
+    aspect-ratio: 1;
+    z-index: -1;
+    pointer-events: none;
+    animation: empaque-veta 16s ease-in-out infinite alternate;
   }
 
   .empaque__grid {
@@ -82,6 +111,18 @@ const productos = [
   @media (min-width: 960px) {
     .empaque__grid {
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @keyframes empaque-veta {
+    to {
+      transform: translate3d(-0.75rem, -0.5rem, 0) scale(1.04);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .empaque__veta {
+      animation: none;
     }
   }
 </style>

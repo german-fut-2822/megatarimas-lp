@@ -19,6 +19,14 @@
   --borde-calido: rgba(76, 38, 25, 0.14);
   --borde-claro-sobre-oscuro: rgba(231, 213, 196, 0.22);
 
+  /* Sistema de interfaz: un azul, un amarillo y neutros funcionales */
+  --carbon: #202326;
+  --texto: #202326;
+  --texto-suave: #555b61;
+  --superficie: #f2f3f4;
+  --borde: rgba(32, 35, 38, 0.14);
+  --borde-sobre-oscuro: rgba(255, 255, 255, 0.24);
+
   /* Tipografía */
   --fuente: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
@@ -27,8 +35,9 @@
   --peso-extrabold: 800;
 
   --tamano-display: clamp(2.25rem, 1.5rem + 2.6vw, 3.75rem);
-  --tamano-h2: clamp(2.1rem, 1.7rem + 1.8vw, 3.1rem);
-  --tamano-h3: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --tamano-h2: clamp(2rem, 1.72rem + 1.25vw, 2.75rem);
+  --tamano-h3: clamp(1.3rem, 1.18rem + 0.5vw, 1.6rem);
+  --tamano-titulo-tarjeta: clamp(1.125rem, 1.06rem + 0.25vw, 1.25rem);
   --tamano-lead: clamp(1.125rem, 1.05rem + 0.3vw, 1.3rem);
   --tamano-cuerpo: clamp(1rem, 0.96rem + 0.15vw, 1.0625rem);
   --tamano-pequeno: 0.9375rem;
@@ -50,7 +59,7 @@
 
   /* Layout */
   --contenedor-max: 1288px;
-  --contenedor-pad: clamp(1.25rem, 2vw + 0.75rem, 3rem);
+  --contenedor-pad: clamp(1.25rem, 3vw, 3.5rem);
   --radio-sm: 8px;
   --radio-md: 18px;
   --radio-pill: 999px;

@@ -33,23 +33,23 @@ const razones = [
 
 <section id="por-que" class="seccion porque">
   <div class="contenedor">
-    <div class="seccion-cabecera seccion-cabecera--ancha rv" style="margin-inline:auto; text-align:center;">
-      <span class="etiqueta-marca">POR QUÉ MEGA TARIMAS</span>
-      <h2 class="titulo-seccion" style="margin-top:0.9rem; max-width:none">
-        El proveedor de tarimas de madera que tu operación necesita
-      </h2>
-      <p class="texto-guia" style="margin-inline:auto">Producción, inventario y entrega en una sola empresa.</p>
-    </div>
+    <div class="porque__principal rv rv--scale">
+      <div class="seccion-cabecera seccion-cabecera--ancha porque__copy">
+        <span class="etiqueta-marca">POR QUÉ MEGA TARIMAS</span>
+        <h2 class="titulo-seccion">El proveedor de tarimas de madera que tu operación necesita</h2>
+        <p class="texto-guia">Producción, inventario y entrega en una sola empresa.</p>
+      </div>
 
-    <div class="porque__banner rv">
-      <Image
-        src={imagen}
-        alt="Montacargas trasladando un bloque de tablones de madera recién cortados dentro de la nave de producción"
-        widths={[640, 960, 1280]}
-        sizes="(min-width: 960px) 70vw, 92vw"
-        loading="lazy"
-        class="porque__imagen"
-      />
+      <div class="porque__banner">
+        <Image
+          src={imagen}
+          alt="Montacargas trasladando un bloque de tablones de madera recién cortados dentro de la nave de producción"
+          widths={[640, 960, 1280]}
+          sizes="(min-width: 960px) 55vw, 100vw"
+          loading="lazy"
+          class="porque__imagen"
+        />
+      </div>
     </div>
 
     <div class="porque__lista">
@@ -73,47 +73,101 @@ const razones = [
 </section>
 
 <style>
-  .porque__banner {
-    margin-top: var(--space-5);
-    margin-bottom: var(--space-6);
-    margin-inline: auto;
-    max-width: 52rem;
+  .porque {
+    background: var(--blanco);
+  }
+
+  .porque__principal {
+    display: grid;
+    overflow: hidden;
+    background: var(--azul);
     border-radius: var(--radio-md);
+    box-shadow: 0 34px 70px -42px rgba(1, 37, 72, 0.85);
+  }
+
+  .porque__copy {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    padding: clamp(2rem, 4.5vw, 3.5rem);
+    align-self: center;
+  }
+
+  .porque__copy :global(.titulo-seccion) {
+    margin-top: var(--space-3);
+    color: var(--blanco);
+    max-width: 20ch;
+    font-size: clamp(2rem, 1.72rem + 1vw, 2.5rem);
+  }
+
+  .porque__copy :global(.texto-guia) {
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 34ch;
+  }
+
+  .porque__banner {
+    position: relative;
+    min-height: 20rem;
     overflow: hidden;
   }
 
-  .porque__imagen {
+  .porque__banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--azul) 0%, rgba(1, 58, 111, 0.3) 30%, rgba(1, 58, 111, 0) 64%);
+    pointer-events: none;
+  }
+
+  .porque__banner :global(.porque__imagen) {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    aspect-ratio: 21 / 9;
+    height: 100%;
     object-fit: cover;
-    object-position: center 42%;
+    object-position: center;
   }
 
   .porque__lista {
+    position: relative;
+    z-index: 3;
     display: grid;
     gap: var(--space-3);
     grid-template-columns: 1fr;
+    margin: calc(var(--space-4) * -1) var(--space-2) 0;
   }
 
   .porque__tarjeta {
-    background: var(--papel-calido);
+    height: 100%;
+    background: var(--blanco);
     border-radius: var(--radio-md);
     padding: var(--space-4);
-    border: 1px solid var(--borde-calido);
+    border: 1px solid var(--borde);
+    box-shadow: var(--sombra-suave);
+    transition:
+      transform var(--dur-base) var(--ease-estandar),
+      box-shadow var(--dur-base) var(--ease-estandar);
+  }
+
+  .porque__tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 56px -30px rgba(1, 37, 72, 0.46);
   }
 
   :global(.porque__icono) {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    padding: 0.55rem;
     color: var(--azul);
+    background: rgba(255, 171, 0, 0.16);
+    border-radius: var(--radio-sm);
   }
 
   .porque__numero {
     margin-top: var(--space-2);
     font-weight: var(--peso-extrabold);
     font-size: clamp(1.9rem, 1.3vw + 1.6rem, 2.4rem);
-    color: var(--nogal);
+    color: var(--azul);
     line-height: 1;
     display: flex;
     flex-direction: column;
@@ -123,17 +177,17 @@ const razones = [
   .porque__numero span {
     font-weight: var(--peso-bold);
     font-size: var(--tamano-pequeno);
-    color: var(--tinta-suave);
+    color: var(--texto-suave);
   }
 
   .porque__tarjeta h3 {
     margin-top: var(--space-2);
-    font-size: 1.1rem;
+    font-size: var(--tamano-titulo-tarjeta);
   }
 
   .porque__tarjeta p:last-child {
     margin-top: 0.5rem;
-    color: var(--tinta-suave);
+    color: var(--texto-suave);
     font-size: var(--tamano-pequeno);
   }
 
@@ -144,8 +198,32 @@ const razones = [
   }
 
   @media (min-width: 960px) {
+    .porque__principal {
+      grid-template-columns: 1fr 1fr;
+      min-height: 29rem;
+    }
+
+    .porque__banner {
+      min-height: 29rem;
+    }
+
+    .porque__banner::after {
+      background: linear-gradient(90deg, var(--azul) 0%, rgba(1, 58, 111, 0.62) 18%, rgba(1, 58, 111, 0) 56%);
+    }
+
     .porque__lista {
       grid-template-columns: repeat(4, 1fr);
+      margin: calc(var(--space-5) * -1) var(--space-4) 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .porque__tarjeta {
+      transition: none;
+    }
+
+    .porque__tarjeta:hover {
+      transform: none;
     }
   }
 </style>

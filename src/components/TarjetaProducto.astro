@@ -1,14 +1,13 @@
 ---
 interface Props {
   titulo: string;
-  acento?: 'nogal' | 'wengue' | 'roble' | 'natural' | 'azul';
   compacta?: boolean;
 }
 
-const { titulo, acento = 'nogal', compacta = false } = Astro.props;
+const { titulo, compacta = false } = Astro.props;
 ---
 
-<article class:list={['tarjeta-producto', { 'tarjeta-producto--compacta': compacta }]} style={`--acento-tarjeta: var(--${acento})`}>
+<article class:list={['tarjeta-producto', { 'tarjeta-producto--compacta': compacta }]}>
   <h3 class="tarjeta-producto__titulo">{titulo}</h3>
   <p class="tarjeta-producto__cuerpo"><slot /></p>
 </article>
@@ -16,32 +15,89 @@ const { titulo, acento = 'nogal', compacta = false } = Astro.props;
 <style>
   .tarjeta-producto {
     position: relative;
-    padding-left: var(--space-3);
-    border-left: 3px solid var(--acento-tarjeta);
-    padding-block: 0.15rem;
+    height: 100%;
+    min-height: 9.5rem;
+    padding: var(--space-4);
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(246, 237, 227, 0.96));
+    border: 1px solid rgba(255, 255, 255, 0.54);
+    border-radius: var(--radio-md);
+    box-shadow: 0 22px 46px -34px rgba(0, 0, 0, 0.9);
+    transition:
+      transform var(--dur-base) var(--ease-estandar),
+      border-color var(--dur-base) var(--ease-estandar),
+      box-shadow var(--dur-base) var(--ease-estandar);
+  }
+
+  .tarjeta-producto::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: var(--amarillo);
+  }
+
+  .tarjeta-producto::after {
+    content: '';
+    position: absolute;
+    top: -4.5rem;
+    right: -4.5rem;
+    width: 9rem;
+    aspect-ratio: 1;
+    border: 1px solid rgba(1, 58, 111, 0.12);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 1.15rem rgba(1, 58, 111, 0.055),
+      0 0 0 2.3rem rgba(1, 58, 111, 0.03);
+    pointer-events: none;
+    transition: transform var(--dur-lenta) var(--ease-estandar);
+  }
+
+  .tarjeta-producto:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 171, 0, 0.72);
+    box-shadow: 0 30px 58px -34px rgba(0, 0, 0, 0.92);
+  }
+
+  .tarjeta-producto:hover::after {
+    transform: translate(-0.5rem, 0.5rem) scale(1.08);
   }
 
   .tarjeta-producto__titulo {
-    font-size: var(--tamano-h3);
-    color: var(--tinta);
+    position: relative;
+    z-index: 1;
+    font-size: var(--tamano-titulo-tarjeta);
+    color: var(--texto);
+    max-width: 23ch;
   }
 
   .tarjeta-producto__cuerpo {
     margin-top: 0.5rem;
-    color: var(--tinta-suave);
-    max-width: 38ch;
+    color: var(--texto-suave);
+    max-width: 34ch;
   }
 
   .tarjeta-producto--compacta {
-    padding-block: 0;
+    padding: var(--space-4);
   }
 
   .tarjeta-producto--compacta .tarjeta-producto__titulo {
-    font-size: 1.05rem;
+    font-size: var(--tamano-titulo-tarjeta);
   }
 
   .tarjeta-producto--compacta .tarjeta-producto__cuerpo {
     font-size: var(--tamano-pequeno);
     margin-top: 0.35rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tarjeta-producto,
+    .tarjeta-producto::after {
+      transition: none;
+    }
+
+    .tarjeta-producto:hover {
+      transform: none;
+    }
   }
 </style>
