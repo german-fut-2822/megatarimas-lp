@@ -26,6 +26,7 @@ const { titulo, imagen, alt } = Astro.props;
   <div class="tarjeta-img__contenido">
     <h3 class="tarjeta-img__titulo">{titulo}</h3>
     <p class="tarjeta-img__cuerpo"><slot /></p>
+    <a class="tarjeta-img__cta" href="#cotizacion">Cotizar Ahora</a>
   </div>
 </article>
 
@@ -84,15 +85,6 @@ const { titulo, imagen, alt } = Astro.props;
     padding: var(--space-4);
   }
 
-  .tarjeta-img__contenido::after {
-    content: '';
-    display: block;
-    width: 100%;
-    margin-top: auto;
-    padding-top: var(--space-4);
-    border-bottom: 1px dashed rgba(32, 35, 38, 0.36);
-  }
-
   .tarjeta-img__titulo {
     font-size: var(--tamano-titulo-tarjeta);
     color: var(--texto);
@@ -100,9 +92,34 @@ const { titulo, imagen, alt } = Astro.props;
 
   .tarjeta-img__cuerpo {
     margin-top: var(--space-2);
+    margin-bottom: var(--space-4);
     color: var(--texto-suave);
     font-size: var(--tamano-pequeno);
     max-width: 36ch;
+  }
+
+  .tarjeta-img__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    min-height: 42px;
+    margin-top: auto;
+    padding: 0.7rem 1.1rem;
+    background: var(--amarillo);
+    color: var(--carbon);
+    border-radius: var(--radio-pill);
+    font-size: var(--tamano-pequeno);
+    font-weight: var(--peso-bold);
+    text-decoration: none;
+    transition:
+      transform var(--dur-rapida) var(--ease-estandar),
+      box-shadow var(--dur-rapida) var(--ease-estandar);
+  }
+
+  .tarjeta-img__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-boton);
   }
 
   @media (prefers-reduced-motion: reduce) {

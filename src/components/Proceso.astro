@@ -8,21 +8,21 @@ import Icono from './Icono.astro';
 const pasos = [
   {
     numero: '1',
-    titulo: '1- Envíanos tu requerimiento',
+    titulo: 'Envíanos tu requerimiento',
     cuerpo: 'Medidas, capacidad de carga, volumen mensual y destino.',
     imagen: imgRequerimiento,
     alt: 'Operario midiendo con precisión un tablón de madera',
   },
   {
     numero: '2',
-    titulo: '2- Recibe diseño y precio',
+    titulo: 'Recibe diseño y precio',
     cuerpo: 'Un asesor te propone la tarima adecuada y su cotización.',
     imagen: imgDiseno,
     alt: 'Tarimas de madera estándar apiladas en la nave de producción',
   },
   {
     numero: '3',
-    titulo: '3- Producimos y entregamos',
+    titulo: 'Producimos y entregamos',
     cuerpo: 'Fabricamos y llevamos tu pedido con flota propia.',
     imagen: imgEntrega,
     alt: 'Montacargas trasladando tablones de madera para su entrega',
@@ -80,6 +80,7 @@ const pasos = [
   }
 
   .proceso__linea {
+    position: relative;
     margin-top: var(--space-7);
     display: grid;
     gap: var(--space-7);
@@ -89,15 +90,15 @@ const pasos = [
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding-top: 3.6rem;
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 4rem;
   }
 
   .proceso__badge {
     position: absolute;
     top: 0;
-    left: 50%;
+    left: 1.3rem;
     transform: translateX(-50%);
     z-index: 2;
     display: inline-flex;
@@ -111,6 +112,7 @@ const pasos = [
     font-weight: var(--peso-extrabold);
     font-size: 1.1rem;
     border: 3px solid var(--blanco);
+    box-shadow: 0 0 0 3px rgba(255, 171, 0, 0.3);
   }
 
   /* Riel de la línea de tiempo: vertical en móvil, horizontal en escritorio */
@@ -123,20 +125,20 @@ const pasos = [
 
   .proceso__paso:not(:last-child)::after {
     top: 1.3rem;
-    left: 50%;
+    left: 1.3rem;
     width: 2px;
     height: calc(100% + var(--space-7) - 1.3rem);
     transform: translateX(-50%);
   }
 
   .proceso__media {
-    width: 100%;
+    width: min(100%, 24rem);
   }
 
   .proceso__imagen {
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
     border-radius: var(--radio-md);
   }
@@ -164,12 +166,34 @@ const pasos = [
       gap: var(--space-5);
     }
 
+    .proceso__paso {
+      align-items: center;
+      text-align: center;
+      padding-top: 3.6rem;
+      padding-left: 0;
+    }
+
+    .proceso__badge {
+      left: 50%;
+    }
+
     .proceso__paso:not(:last-child)::after {
       top: 1.3rem;
       left: 50%;
       width: calc(100% + var(--space-5));
       height: 2px;
       transform: none;
+    }
+
+    .proceso__paso::before {
+      content: '';
+      position: absolute;
+      top: 2.6rem;
+      left: 50%;
+      width: 2px;
+      height: 1rem;
+      transform: translateX(-50%);
+      background: var(--amarillo);
     }
   }
 </style>

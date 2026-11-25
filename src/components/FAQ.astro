@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import fondoFaq from '../assets/images/faq-tarimas-planta.png';
 import Icono from './Icono.astro';
 import WoodGrain from './WoodGrain.astro';
 
@@ -31,12 +33,22 @@ const preguntas = [
 ---
 
 <section id="faq" class="seccion faq">
+  <Image
+    src={fondoFaq}
+    alt=""
+    widths={[640, 960, 1400, 1920]}
+    sizes="100vw"
+    loading="lazy"
+    class="faq__fondo"
+    aria-hidden="true"
+  />
+  <div class="faq__degradado" aria-hidden="true"></div>
   <div class="faq__veta" aria-hidden="true">
     <WoodGrain corner="bottom-right" color="rgba(255,171,0,0.38)" />
   </div>
 
   <div class="contenedor faq__grid">
-    <div class="seccion-cabecera rv">
+    <div class="seccion-cabecera faq__copy rv rv--left">
       <span class="etiqueta-marca">PREGUNTAS</span>
       <h2 class="titulo-seccion" style="margin-top:0.9rem">Preguntas frecuentes</h2>
     </div>
@@ -54,19 +66,6 @@ const preguntas = [
         ))
       }
     </div>
-
-    <div class="faq__cierre rv">
-      <p>¿No encontraste tu respuesta? Escríbenos y te atendemos directo.</p>
-      <a
-        class="boton boton--amarillo"
-        href="https://wa.me/528183013487"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Icono nombre="whatsapp" />
-        Hablar por WhatsApp
-      </a>
-    </div>
   </div>
 </section>
 
@@ -74,8 +73,28 @@ const preguntas = [
   .faq {
     position: relative;
     isolation: isolate;
-    background: var(--azul);
+    background: var(--carbon);
     overflow: hidden;
+  }
+
+  .faq :global(.faq__fondo) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -3;
+  }
+
+  .faq__degradado {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      linear-gradient(0deg, rgba(255, 171, 0, 0.1) 0%, transparent 24%),
+      linear-gradient(90deg, rgba(32, 35, 38, 0.66) 0%, rgba(32, 35, 38, 0.48) 44%, rgba(32, 35, 38, 0.34) 100%),
+      linear-gradient(180deg, rgba(32, 35, 38, 0.42) 0%, rgba(32, 35, 38, 0.12) 72%, rgba(32, 35, 38, 0.04) 100%);
   }
 
   .faq .titulo-seccion {
@@ -89,30 +108,36 @@ const preguntas = [
     width: min(60vw, 42rem);
     aspect-ratio: 1;
     z-index: -1;
+    opacity: 0.55;
     pointer-events: none;
   }
 
   .faq__grid {
-    max-width: 50rem;
+    display: grid;
+    gap: var(--space-6);
+    align-items: start;
   }
 
   .faq__lista {
-    margin-top: var(--space-4);
     display: grid;
-    gap: var(--space-3);
+    gap: var(--space-2);
   }
 
   .faq__item {
-    background: var(--blanco);
-    border-left: 3px solid var(--amarillo);
-    border-radius: var(--radio-md);
-    padding: 0.4rem var(--space-3);
-    box-shadow: var(--sombra-suave);
-    transition: box-shadow var(--dur-base) var(--ease-estandar);
+    background: rgba(32, 35, 38, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-left: 3px solid rgba(255, 171, 0, 0.8);
+    border-radius: 0;
+    padding-inline: var(--space-3);
+    backdrop-filter: blur(8px);
+    transition:
+      border-color var(--dur-base) var(--ease-estandar),
+      background var(--dur-base) var(--ease-estandar);
   }
 
   .faq__item[open] {
-    box-shadow: 0 28px 48px -24px rgba(28, 18, 13, 0.45);
+    background: rgba(32, 35, 38, 0.9);
+    border-color: var(--amarillo);
   }
 
   .faq__item summary {
@@ -123,6 +148,7 @@ const preguntas = [
     gap: var(--space-3);
     padding-block: 1rem;
     font-weight: var(--peso-bold);
+    color: var(--blanco);
     cursor: pointer;
   }
 
@@ -134,7 +160,7 @@ const preguntas = [
     flex-shrink: 0;
     width: 1.1rem;
     height: 1.1rem;
-    color: var(--azul);
+    color: var(--amarillo);
     transition: transform var(--dur-base) var(--ease-estandar);
   }
 
@@ -144,21 +170,19 @@ const preguntas = [
 
   .faq__item p {
     padding-bottom: var(--space-3);
-    color: var(--texto-suave);
+    color: rgba(255, 255, 255, 0.76);
     max-width: 62ch;
   }
 
-  .faq__cierre {
-    margin-top: var(--space-6);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-3);
-    text-align: center;
-  }
+  @media (min-width: 900px) {
+    .faq__grid {
+      grid-template-columns: minmax(15rem, 0.62fr) minmax(0, 1.38fr);
+      gap: clamp(3rem, 7vw, 7rem);
+    }
 
-  .faq__cierre p {
-    font-weight: var(--peso-bold);
-    color: rgba(255, 255, 255, 0.78);
+    .faq__copy {
+      margin: 0;
+      padding-top: var(--space-2);
+    }
   }
 </style>

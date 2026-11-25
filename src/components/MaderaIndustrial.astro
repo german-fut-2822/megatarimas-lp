@@ -5,21 +5,24 @@ import TarjetaProducto from './TarjetaProducto.astro';
 import WoodGrain from './WoodGrain.astro';
 
 const productos = [
-  { titulo: 'Madera para tarimas', cuerpo: 'Pino en medidas para fabricar o reparar tarimas.' },
+  { titulo: 'Madera para tarimas', cuerpo: 'Pino en medidas para fabricar o reparar tarimas.', icono: 'tarima' },
   {
     titulo: 'Madera para embalaje',
     cuerpo: 'Para cajas, huacales y madera para embalaje de exportación.',
+    icono: 'embalaje',
   },
   {
     titulo: 'Madera de pino industrial',
     cuerpo: 'Maderas industriales para empaque, construcción de bases y uso en planta.',
+    icono: 'madera',
   },
   {
     titulo: 'Madera tratada industrial',
     cuerpo: 'Madera certificada con tratamiento térmico, lista para embalaje de exportación.',
+    icono: 'tratamiento',
   },
-  { titulo: 'Madera cepillada', cuerpo: 'Acabado uniforme para piezas que lo requieren.' },
-  { titulo: 'Triplay industrial', cuerpo: 'Para tapas, bases y embalaje cerrado.' },
+  { titulo: 'Madera cepillada', cuerpo: 'Acabado uniforme para piezas que lo requieren.', icono: 'cepillada' },
+  { titulo: 'Triplay industrial', cuerpo: 'Para tapas, bases y embalaje cerrado.', icono: 'triplay' },
 ];
 ---
 
@@ -39,29 +42,30 @@ const productos = [
 
   <div class="contenedor madera__interior">
     <div class="madera__encabezado rv">
-      <span class="etiqueta-marca">MADERA INDUSTRIAL</span>
-      <h2 class="titulo-seccion" style="margin-top:0.9rem; color:var(--blanco)">
-        Madera para tarimas, embalaje e industria
-      </h2>
-      <p class="texto-guia" style="color:rgba(255,255,255,0.86)">
-        La misma madera con la que fabricamos nuestras tarimas y embalaje, disponible para tu
-        planta o taller.
-      </p>
+      <div class="madera__copy">
+        <span class="etiqueta-marca">MADERA INDUSTRIAL</span>
+        <h2 class="titulo-seccion" style="margin-top:0.9rem; color:var(--blanco)">
+          Madera para tarimas, embalaje e industria
+        </h2>
+        <p class="texto-guia" style="color:rgba(255,255,255,0.86)">
+          La misma madera con la que fabricamos nuestras tarimas y embalaje, disponible para tu
+          planta o taller.
+        </p>
+        <a class="boton boton--amarillo" href="#cotizacion">Cotizar Ahora</a>
+      </div>
     </div>
 
     <div class="madera__lista">
       {
         productos.map((p, i) => (
           <div class="madera__producto rv rv--scale" style={`transition-delay:${i * 70}ms`}>
-            <TarjetaProducto titulo={p.titulo} compacta>
+            <TarjetaProducto titulo={p.titulo} icono={p.icono} compacta>
               {p.cuerpo}
             </TarjetaProducto>
           </div>
         ))
       }
     </div>
-
-    <a class="boton boton--amarillo rv" href="#cotizacion">Cotizar Ahora</a>
   </div>
 </section>
 
@@ -114,6 +118,10 @@ const productos = [
     max-width: 48ch;
   }
 
+  .madera__copy .boton {
+    margin-top: var(--space-4);
+  }
+
   .madera__lista {
     display: grid;
     gap: var(--space-3);
@@ -121,10 +129,6 @@ const productos = [
 
   .madera__producto {
     height: 100%;
-  }
-
-  .madera__interior > .boton {
-    margin-top: var(--space-6);
   }
 
   @media (min-width: 720px) {

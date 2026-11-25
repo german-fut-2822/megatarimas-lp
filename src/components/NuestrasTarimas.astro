@@ -35,10 +35,11 @@ const productos = [
 ---
 
 <section id="tarimas" class="seccion tarimas">
-  <TexturaFondo intensidad={0.18} posicion="center 42%" />
+  <TexturaFondo intensidad={0.09} posicion="center 42%" />
   <div class="contenedor">
     <div class="seccion-cabecera rv rv--left">
-      <h2 class="titulo-seccion">Nuestras Tarimas</h2>
+      <span class="etiqueta-marca">TARIMAS</span>
+      <h2 class="titulo-seccion" style="margin-top:0.9rem">Nuestras Tarimas</h2>
       <p class="texto-guia">
         Fabricamos pallets de madera estándar o sobre diseño, pensados para almacén, carga
         pesada y exportación.
@@ -57,7 +58,6 @@ const productos = [
       }
     </div>
 
-    <a class="boton boton--amarillo rv" href="#cotizacion">Cotizar Ahora</a>
   </div>
 </section>
 
@@ -76,10 +76,6 @@ const productos = [
   .tarimas__grid {
     display: grid;
     gap: var(--space-4);
-  }
-
-  .tarimas > .contenedor > .boton {
-    margin-top: var(--space-6);
   }
 
   @media (min-width: 640px) {

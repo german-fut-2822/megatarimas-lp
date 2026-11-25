@@ -78,11 +78,12 @@ const conexiones = [
   }
 
   .mapa-mx__estado {
-    fill: var(--azul);
-    fill-opacity: 0.55;
-    stroke: var(--azul);
+    fill: var(--blanco);
+    fill-opacity: 0.42;
+    stroke: rgba(255, 171, 0, 0.72);
     stroke-width: 1.1;
     stroke-linejoin: round;
+    filter: drop-shadow(0 0 3px rgba(255, 171, 0, 0.3));
     animation: mapa-pulso 3.6s ease-in-out infinite;
     transition:
       fill var(--dur-rapida) var(--ease-estandar),
@@ -100,10 +101,10 @@ const conexiones = [
   @keyframes mapa-pulso {
     0%,
     100% {
-      fill-opacity: 0.4;
+      fill-opacity: 0.34;
     }
     50% {
-      fill-opacity: 0.68;
+      fill-opacity: 0.56;
     }
   }
 
@@ -189,7 +190,7 @@ const conexiones = [
     }
 
     .mapa-mx__estado {
-      fill-opacity: 0.55;
+      fill-opacity: 0.42;
     }
   }
 </style>

@@ -31,21 +31,25 @@ const logos = [
       {
         logos.map((l, i) => (
           <div class="cert-card rv rv--scale" style={`transition-delay:${i * 70}ms`}>
-            <Image
-              src={l.src}
-              alt={l.alt}
-              widths={[160, 240, 320]}
-              sizes="(min-width: 960px) 13vw, (min-width: 640px) 18vw, 32vw"
-              loading="lazy"
-              class="cert-card__logo"
-            />
+            <div class="cert-card__media">
+              <Image
+                src={l.src}
+                alt={l.alt}
+                widths={[160, 240, 320]}
+                sizes="(min-width: 960px) 13vw, (min-width: 640px) 18vw, 32vw"
+                loading="lazy"
+                class="cert-card__logo"
+              />
+            </div>
             <span class="cert-card__etiqueta">{l.nombre}</span>
           </div>
         ))
       }
 
       <div class="cert-card rv rv--scale" style="transition-delay:280ms">
-        <img src="/certificaciones/fsc.svg" alt="Logotipo FSC (Forest Stewardship Council)" class="cert-card__logo" loading="lazy" />
+        <div class="cert-card__media">
+          <img src="/certificaciones/fsc.svg" alt="Logotipo FSC (Forest Stewardship Council)" class="cert-card__logo cert-card__logo--fsc" loading="lazy" />
+        </div>
         <span class="cert-card__etiqueta">FSC</span>
       </div>
     </div>
@@ -106,7 +110,6 @@ const logos = [
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-2);
     padding: var(--space-3);
     border: 1px solid rgba(255, 255, 255, 0.5);
     box-shadow: var(--sombra-suave);
@@ -115,12 +118,11 @@ const logos = [
       box-shadow var(--dur-base) var(--ease-estandar);
   }
 
-  .cert-card::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto;
-    height: 4px;
-    background: var(--amarillo);
+  .cert-card__media {
+    width: 100%;
+    height: 5.25rem;
+    display: grid;
+    place-items: center;
   }
 
   .cert-card:hover {
@@ -136,32 +138,34 @@ const logos = [
 
   :global(.cert-card__logo) {
     width: min(100%, 11rem);
-    height: 4.5rem;
+    max-height: 5.25rem;
     object-fit: contain;
     transition: transform var(--dur-lenta) var(--ease-estandar);
+  }
+
+  :global(.cert-card__logo--fsc) {
+    width: 4.5rem;
+    max-height: 5.25rem;
+  }
+
+  .cert-card__etiqueta {
+    display: block;
+    margin-top: var(--space-2);
+    color: var(--azul);
+    font-size: var(--tamano-pequeno);
+    font-weight: var(--peso-extrabold);
+    line-height: 1.2;
+    text-align: center;
   }
 
   .cert-card:hover :global(.cert-card__logo) {
     transform: scale(1.06);
   }
 
-  .cert-card__etiqueta {
-    font-weight: var(--peso-extrabold);
-    font-size: var(--tamano-pequeno);
-    color: var(--azul);
-    text-align: center;
-    letter-spacing: 0.01em;
-  }
-
   @media (min-width: 640px) {
     .certificaciones__logos {
       grid-template-columns: repeat(6, 1fr);
       row-gap: var(--space-4);
-    }
-
-    :global(.cert-card__logo) {
-      width: min(100%, 13rem);
-      height: 5.25rem;
     }
 
     /* Pirámide: 3 tarjetas arriba, 2 abajo centradas en los espacios */
@@ -184,6 +188,7 @@ const logos = [
     .cert-card:nth-child(5) {
       grid-column: 4 / 6;
       width: auto;
+      justify-self: stretch;
     }
   }
 

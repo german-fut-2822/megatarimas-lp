@@ -13,7 +13,13 @@ interface Props {
     | 'flecha'
     | 'menu'
     | 'cerrar'
-    | 'chevron';
+    | 'chevron'
+    | 'tarima'
+    | 'embalaje'
+    | 'madera'
+    | 'tratamiento'
+    | 'cepillada'
+    | 'triplay';
   class?: string;
 }
 
@@ -98,6 +104,12 @@ const { nombre, class: className = '' } = Astro.props;
   {nombre === 'menu' && <path d="M4 7h16M4 12h16M4 17h16" />}
   {nombre === 'cerrar' && <path d="M5 5l14 14M19 5 5 19" />}
   {nombre === 'chevron' && <path d="m6 9 6 6 6-6" />}
+  {nombre === 'tarima' && <path d="M4 8h16v6H4zM7 14v3m10-3v3M3 17h18M7 8V5m5 3V5m5 3V5" />}
+  {nombre === 'embalaje' && <path d="m4 7 8-4 8 4-8 4-8-4Zm0 0v10l8 4 8-4V7M12 11v10" />}
+  {nombre === 'madera' && <path d="M5 5h14v14H5zM5 9h14M5 14h14M9 5v4m6 5v5" />}
+  {nombre === 'tratamiento' && <path d="M12 3v3m-5.7-.7 2.1 2.1M3 12h3m12 0h3m-3.3-6.7-2.1 2.1M8 15a4 4 0 1 1 8 0v4H8v-4Zm2 4v2m4-2v2" />}
+  {nombre === 'cepillada' && <path d="M4 16 16 4l4 4L8 20H4v-4Zm9-9 4 4M4 12h5M12 20h8" />}
+  {nombre === 'triplay' && <path d="m4 8 8-4 8 4-8 4-8-4Zm0 4 8 4 8-4M4 16l8 4 8-4" />}
 </svg>
 
 <style>
