@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import heroImg from '../assets/images/hero-operario-tarimas.png';
+import nom from '../assets/certificaciones/nom.png';
+import ispm15 from '../assets/certificaciones/ispm-15.png';
 import Icono from './Icono.astro';
 import WoodGrain from './WoodGrain.astro';
 
@@ -8,8 +10,12 @@ const puntos = [
   'Venta de tarimas por mayoreo',
   'Diseño a la medida de tu carga',
   'Listas para exportación',
-  'Listos para Exportación Internacional',
-  'Madera Brasileña, chilena, americana y nacional',
+  'Madera brasileña, chilena, americana y nacional',
+];
+
+const certificaciones = [
+  { src: nom, alt: 'Logotipo NOM-144' },
+  { src: ispm15, alt: 'Sello IPPC ISPM 15 Certified' },
 ];
 ---
 
@@ -36,11 +42,20 @@ const puntos = [
     <div class="hero__texto">
       <h1 class="hero__titulo">Soluciones en madera para la industria</h1>
       <p class="hero__parrafo">
-        Fabricantes de tarimas industriales de madera estándar, reforzadas y a la medida, tratadas
-        térmicamente y certificadas NOM-144 e ISPM-15 para exportación. Producimos hasta 8,000
-        tarimas al día. También fabricamos cajas, huacales y embalaje de madera, y vendemos madera
-        industrial.
+        Fabricantes de tarimas industriales de madera reforzadas y a la medida, tratadas
+        térmicamente y certificadas para exportación. También fabricamos cajas, huacales y
+        embalaje de madera, y vendemos madera para el sector de la construcción.
       </p>
+
+      <div class="hero__certificaciones">
+        {
+          certificaciones.map((c) => (
+            <div class="hero__cert-chip">
+              <Image src={c.src} alt={c.alt} widths={[80, 120]} sizes="7rem" loading="eager" />
+            </div>
+          ))
+        }
+      </div>
 
       <ul class="hero__lista">
         {
@@ -132,6 +147,29 @@ const puntos = [
     font-size: clamp(1rem, 0.94rem + 0.35vw, 1.15rem);
     color: rgba(255, 255, 255, 0.92);
     max-width: 46ch;
+  }
+
+  .hero__certificaciones {
+    margin-top: var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .hero__cert-chip {
+    display: grid;
+    place-items: center;
+    height: 2.75rem;
+    padding-inline: 0.7rem;
+    background: var(--blanco);
+    border-radius: var(--radio-md);
+    box-shadow: var(--sombra-suave);
+  }
+
+  .hero__cert-chip :global(img) {
+    height: 1.6rem;
+    width: auto;
+    object-fit: contain;
   }
 
   .hero__lista {
